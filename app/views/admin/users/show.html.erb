@@ -1,0 +1,47 @@
+<%= image_title("admin/titles/user_stories.gif", "User Stories") %>
+
+<h2 style="margin-left: 41px;"><i>user:</i> <%= @user.login %></h2> 
+
+<ul class="table five">
+  <li class="headings">
+    <ul>
+      <li>Email</li>
+      <li>Name</li>
+      <li>Location</li>
+      <li>Birthday</li>
+      <li>Gender</li>
+    </ul>
+    <br class="clear" />
+  </li>
+  <li class="data">
+    <ul class="item gray">
+      <li class="expandable"><%= mail_to @user.email %></li>
+      <li><%= @user.name.empty? ? 'n/a' : @user.name %></li>
+      <li class="expandable"><%= @user.location.empty? ? 'n/a' : @user.location %></li>
+      <li><%= @user.dob ? @user.dob.strftime('%x') : 'n/a' %></li>
+      <li><%= @user.gender %></li>
+    </ul>
+    <br class="clear" />
+  </li>  
+</ul>
+
+<br/>
+<div class="clear">&nbsp;</div>
+<br/>
+
+<div class="action">
+  <%= link_to "edit", edit_admin_user_path(@user) %>
+  <% unless @user.id == 1 %> 
+    / <%= link_to "delete", admin_user_path(@user), :confirm => 'Are you sure you want to delete this user and all of their stories?', :method => :delete %>
+  <% end %>
+</div>
+
+
+<h2 style="margin-left: 41px;"><%= @user.login %>'s stories</h2> 
+
+<%= render 'admin/stories/list' %>
+
+<div class="action">
+  <%= link_to "view all stories", admin_stories_path %> / 
+  <%= link_to "view all users", admin_users_path %>
+</div>

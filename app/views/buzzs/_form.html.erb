@@ -1,0 +1,22 @@
+<% form_for(@buzz) do |f| %>
+<ul>
+  <li>
+  	<%= f.label :subject %><br/>
+  	<%= f.text_field :subject, :class => 'required', :style=>"width:100%;" %><br/>
+  </li>
+  <li>
+  	<%= f.label :body %><br/>
+  	<%= f.text_area :body, :class => 'required', :style=>"width:100%;height:100px" %><br/>
+  </li>
+  <li class="buttons">
+
+	<%= f.hidden_field :from_user_id, :class => "hidden"%>
+	<%= f.hidden_field :to_user_id, :class => "hidden" %>
+	<%= f.hidden_field :root_id, :class => "hidden" %>
+	<%= f.hidden_field :referring_url, :value => current_path, :class => "hidden" %>
+	<%= link_to_function "cancel", "", :id => 'btnCancelBuzz', :class => 'image' %>
+
+	<%= f.submit 'send', :id => 'btnSendBuzz', :class => 'image' %>
+  </li>
+</ul>
+<%end%>

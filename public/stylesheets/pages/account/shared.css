@@ -1,0 +1,57 @@
+div#topBar {
+  width: 930px;
+  height: 47px;
+  margin: 0 auto;
+  background-color: #303030;
+  }
+div#content {
+  width: 796px;
+  margin: 40px 0 0 75px;
+  padding: 0 0 60px 0;
+  }
+div#content h1 {
+  margin: 0 0 27px 0;
+  }
+div#accountHeader {
+  position: relative;
+  width: 796px;
+  padding: 0 0 20px 0;
+  margin: 0 0 40px 0;
+  border-bottom: 1px dashed #999;
+  }
+div#welcome {
+  float: left;
+  font-size: 13px;
+  width: 410px;
+  }
+div#welcome h1 {
+  margin-bottom: 10px;
+  background-image: url(/images/pages/account/welcome.gif);
+  background-position: left bottom;
+  } 
+div#welcome p {
+  margin: 0 0 0 25px;
+  }
+div#welcome span {
+  font-size: 18px;
+  color: #2b779b;
+  }
+div#tools {
+  float: right;
+  width: 315px;
+  }
+div#tools h1 {
+  margin-bottom: 17px;
+  background-image: url(/images/pages/account/tools.gif);
+  }
+div#tools ul {
+  list-style-type: none;
+  margin: 0 0 0 37px;
+  padding: 0;
+  }
+div#tools a {
+  color: #999;
+  }
+div#tools a:hover {
+  color: #3f8f2a;
+  }

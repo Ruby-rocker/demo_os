@@ -1,0 +1,46 @@
+div#content {
+  width: 823px;
+  min-height: 460px;
+  margin: 0 0 0 60px;
+  padding: 40px 0 60px 0;
+  background: #fff url(/images/pages/account/divider.gif) 440px 0 no-repeat;
+  }
+
+div#content h1 {
+  margin: 0 0 27px 0;
+  height: 31px;
+  }
+  
+div#createAccount {
+  float: left;
+  width: 410px;
+  }
+div#createAccount h1 {
+  background-image: url(/images/pages/account/createnewaccount.gif);
+  background-position: left bottom;
+  }
+div#createAccount form {
+	width: 340px;
+	}
+
+div#createAccount form ul li.checkbox {
+	margin: 15px 0 15px 0;
+	width: 220px;
+	}
+	
+label#lblAgree {
+  float: left;
+  width: 190px;
+  margin: -6px 0 0 0;
+  font-size: 10px;
+  }
+div#signIn {
+  float: right;
+  width: 315px;
+  }
+div#signIn h1 {
+  background-image: url(/images/pages/account/accountsignin.gif);
+  }
+div#signIn form {
+	width: 250px;
+	}

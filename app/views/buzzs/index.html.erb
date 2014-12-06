@@ -1,0 +1,24 @@
+<%= render :partial => 'users/account_header' %>
+
+<h1>What's Buzzing!</h1>
+<% if @buzzs.empty?%>
+  <i>You have no buzz! You can buzz someone while reading their story!</i>
+<%else%>
+	<div id="buzzConversatons" >
+		<ul class ='buzz_list'>
+		<% @buzzs.each do |buzzitem| %>
+			<li class="buzz" data-buzzid="<%=buzzitem.id%>">
+				<%= link_to 'delete', buzz_path(buzzitem), :confirm => 'Are you sure?', :method => :delete, :class => 'buzzlink' %>
+			  <%= link_to buzzitem.subject, buzz_path(buzzitem), :class => 'title' %> - <span class='buzzdate'><%= buzzitem.created_at.strftime('%B %d, %Y').gsub(/(\s0)/, ' ') %></span><br/>
+				With: </h3>
+				<%if buzzitem.from == current_user %>
+				  <%= link_to buzzitem.to.login, "/search/author/#{buzzitem.to.login}" %>
+				<%else%>
+				  <%= link_to buzzitem.from.login, "/search/author/#{buzzitem.from.login}" %>
+        <%end%><br/>
+				<i><%= buzzitem.body[0..250]%>...</i>
+			</li>
+		<% end %>
+		</ul>
+	</div>
+<%end%>

@@ -1,0 +1,39 @@
+<%= image_title("pages/contact/report_content.png", "Report Content") %>
+
+<div id="contact">
+
+  <p>Please report any uncomplimentary content found on the site.  We do our best to keep it clean and fun, but we do need your help from time to time.  Let us know what we can do to improve OneStoryroad.</p>
+   
+  <br/>
+  
+  <div style="width: 410px;">
+  	<% form_for @report do |f| %>
+  	<ul id="contactFormFields">
+  		<li>
+  			<%= f.label :name %><br/>
+  			<%= f.text_field :name, :class => 'required' %><br/>
+  		</li>
+  		<li>
+  			<%= f.label :email %><br/>
+  			<%= f.text_field :email, :class => 'required' %><br/>
+  		</li>
+  		<li>
+  			<%= f.label :message %><br/>
+  			<%= f.text_area :message, :rows=> 6, :class => 'required' %><br/>
+  		</li>
+  		<li class="buttons">
+  			<%= f.submit 'send' %><br/>
+  		</li>
+  	</ul>
+  	<% end %>
+  	<br/>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+  new Mootils.FormValidator('new_contact');
+  new Mootils.AutoGrow('#contact_message');
+//]]>
+</script>

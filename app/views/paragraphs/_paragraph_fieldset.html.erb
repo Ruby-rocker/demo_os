@@ -1,0 +1,56 @@
+<% fields_for "paragraphs[]", paragraph do |form| -%>
+
+<% paragraph.id = paragraph.id || Paragraph.maximum(:id) + 1 rescue 0 %>
+
+<% @last_field_set = "paragraph_#{paragraph_fieldset_counter}" %>
+
+<fieldset id="<%= @last_field_set %>" class="storySection">
+
+<ul>
+
+	<li class="paragraph">
+   <%= form.text_area :body, :cols => 68, :rows => 10, :class => "autoField" %>
+	</li>
+	
+	<% if paragraph.asset %>
+		
+	<li class="photo" id="photoBox<%= paragraph_fieldset_counter %>">
+   <span>
+     
+     <b>photo <%= paragraph_fieldset_counter + 1 %></b>
+     
+     <%= link_to paragraph.asset.src_file_name, paragraph.asset.url(:large), :class => "fileName preview" %>
+     
+     <%= link_to 'view', paragraph.asset.url(:large), :class => "preview" %> / 
+     <a href="##replace" class="replace">replace</a> / 
+     <%= link_to "delete", story_photo_path(paragraph.user, paragraph.story, paragraph.asset), :method => :delete, :confirm => "Are you sure you want to delete this photo? All other changes to this story won't be saved.", :class => "delete" %>
+     
+   </span>
+	</li>
+	
+	<li class="photo" id="replacer<%= paragraph_fieldset_counter %>" style="display: none;">
+   <span>
+     <%= form.file_field :asset %>
+   </span>
+	</li>
+	
+	<% else -%>
+	
+	<li class="photo">
+   <span>
+     <%= form.label :asset, "add photo" %>
+     <%= form.file_field :asset %><div class="clear">&nbsp;</div>
+   </span>
+	</li>
+	
+	
+	<% end -%>
+	
+	
+
+	</ul>
+</fieldset>
+
+<% @last_id = paragraph.id %>
+
+<% end -%>

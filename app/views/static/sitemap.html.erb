@@ -1,0 +1,56 @@
+
+<h1>Site Map</h1>
+
+	
+<div class="page">
+  <h2><%= link_to "Home", root_path %></h2>
+  <p>Here is a place for stories large or small.  Open to anyone and everyone this is a place to explore the maze of stories that make up the world around us.  Use the "Map" to navigate the globe and search stories shared by others.  With "Keyword" you can refine a search using created boundaries to narrow the results.  Check out the most recent story added or navigate the globe.  This is a place to browse or share a story, at One Story Road.  </p>
+</div>
+
+<div class="page">
+  <h2><%= link_to "My Account", account_path %></h2>
+  <p>This is where to log on to an existing account or start a new one.</p>
+  <p>For a new account fill in the information and than read and agree to the terms and conditions.  Once created follow the instructions to activated your account.  After an account has been created and activated you can log on by entering your username and password.  Manage your account or share a story.  Enjoy!</p>
+  <% if logged_in? %>
+    <h4><%= link_to "Submit a Story", new_story_path(current_user) %></h4>
+    <h4><%= link_to "View my Stories", current_user %></h4>
+    <h4><%= link_to "Edit my Account", edit_user_path(current_user) %></h4>
+    <h4><%= link_to "Logout", logout_path %></h4>
+    <br/>
+  <% end %>
+</div>
+
+<div class="page">
+  <h2><%= link_to "Submit Story", logged_in? ? new_story_path(current_user) : account_path %></h2>
+  <p>This is where to submit a new story after logging into your account.</p>
+  <p>Fill in the submit page and publish a story.  Add photos or let them tell the story.  If the story is not finished save it to drafts and it can be completed and published later.</p>
+</div>
+
+<% if feature_story_path %>
+<div class="page">
+  <h2><%= link_to "Feature Story", feature_story_path, :class => "story" %></h2>
+  <p>This page is the highlighted story of the month. Based on most views, here is the story chosen by the people. Bookmark it or email it to a friend.</p>
+</div>
+<% end %>
+
+<div class="page">
+  <h2><%= link_to "Search", new_search_path %></h2>
+  <p></p>
+</div>	
+<div class="page">
+  <h2><%= link_to "Contact Us", contacts_path %></h2>
+  <p>Want to mail-in your story?  Need to get in touch about a question or comment? This is the page to go to.  Let OneStoryRoad.com know what you think.  Thanks!</p>
+</div>
+
+<div class="page">
+  <h2><%= link_to "Privacy Policy", "/privacy", :class => "popup" %></h2>
+  <p></p>
+</div>
+<div class="page">
+  <h2><%= link_to "Terms &amp; Conditions", "/terms", :class => "popup" %></h2>
+  <p></p>
+</div>
+<div class="page">
+  <h2><%= link_to "Sitemap", "/sitemap" %></h2>
+  <p></p>
+</div>	

@@ -1,0 +1,16 @@
+<%= image_title("pages/account/password_recovery.gif", "Forgot Password") %>
+<div style="width: 50%;">
+<% form_tag url_for(:action => 'create') do %>
+<ul>
+  <li>
+    <%= label_tag :email, "What is the email address used to create your account?", :style => "margin: 0; width: auto;" %><br/>
+  </li>
+  <li>
+    <%= text_field_tag :email, nil, :style => 'width: 84%;' %><br />
+  </li>
+  <li>
+    <%= submit_tag "Continue", :style => 'left: 62%;' %>
+  </li>
+</ul>    
+<% end %>
+</div>

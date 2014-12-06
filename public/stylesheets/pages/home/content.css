@@ -1,0 +1,89 @@
+div#header {
+	display: block;
+  position: relative;
+  width: 930px;
+  height: 246px;
+  margin: 0 auto;
+  background-image: url(/images/pages/home/slideshow/osrbanner_five.jpg);
+  text-indent: -9999px;
+  overflow: hidden;
+  }
+div#intro {
+	display: block;
+  position: relative;
+  width: 930px;
+  height: 175px;
+  margin: 0 auto;
+  background: transparent url(/images/pages/home/bg_intro.gif) 0 0 no-repeat;
+  }
+a#logo {
+  position: absolute;
+  left: 46px;
+  top: 45px;
+  text-indent: -9999px;
+  overflow: hidden;
+  }
+div#intro h1 {
+  position: absolute;
+  display: block;
+  width: 87px;
+  height: 10px;
+  left: 310px;
+  top: 57px;
+  font-size: 12px;
+  background-image: url(/images/pages/home/title_welcome.gif);
+  }
+div#intro p {
+  position: absolute;
+  display: block;
+  left: 310px;
+  top: 74px;
+  width: 380px;
+  font-size: 11px;
+  margin: 0;
+  }
+div#content {
+  width: 930px;
+  margin: 0 auto;
+  }
+  
+a#btnFeature2 {
+  display: block;
+  position: absolute;
+  right: 33px;
+  width: 168px;
+  height: 112px;
+  color: #777;
+  }
+a#btnFeature2 {
+  top: 52px;
+  background-image: url(/images/pages/home/btn_featured_story2.gif);
+  }
+  
+  
+a#btnFeature {
+  display: block;
+  position: absolute;
+  right: 33px;
+  width: 161px;
+  height: 95px;
+  color: #777;
+  }
+a#btnFeature {
+  top: 52px;
+  background-image: url(/images/pages/home/btn_featured_story.gif);
+  }
+  
+  
+a#btnFeature span {
+  display: block;
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
+  height: 11px;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 15px;
+  text-indent: 0;
+  color: #3c2423;
+  }
+  

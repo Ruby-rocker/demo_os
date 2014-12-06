@@ -1,0 +1,261 @@
+/* MAP HEADER */
+div#mapTop {
+  width: 930px;
+  height: 89px;
+  }
+  
+div#mapButtons {
+	position: absolute;
+	left: 326px;
+	}
+a#world_wide_locator {
+  text-indent: -9999px;
+}
+	
+a#btnMap {
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 29px;
+  }
+a#btnKeyword {
+  display: block;
+  position: absolute;
+  left: 81px;
+  top: 45px;
+  width: 66px;
+  height: 29px;
+  background-position: -50px 0px;
+  }
+a#btnMap.active,
+a#btnMap:hover {
+  background-position: 0 -32px;
+  }
+a#btnKeyword.active,
+a#btnKeyword:hover {
+  background-position: -50px -32px;
+  }
+a#btnMap:active {
+  background-position: 0 -58px;
+  }
+a#btnKeyword:active {
+  background-position: -53px -58px;
+  }
+
+
+
+/* HEADER SEARCH */
+
+div#mapTop form {
+	position: absolute;
+	left: 615px;
+	top: 18px;
+	width: 265px;
+	height: 50px;
+	}
+div#mapTop form ul li label {
+  margin: 3px 12px 0 0;
+  padding: 0;
+  font-size: 14px;
+  width: 60px;
+  height: 16px;
+  color: #777;
+  text-align: left;
+  }
+div#mapTop form ul li input {
+	width: 130px;
+	font-size: 11px;
+	border: 0;
+	}
+div#mapTop form input#btn_go {
+	position: absolute;
+	left: 230px;
+	right: 0;
+	top: 6px;
+	width: 42px;
+	height: 42px;
+	padding: 0;
+	margin: 0;
+	}
+/*#lblKeywords {
+  background-image: url(/images/pages/home/lbl_keywords.gif);
+  }
+#lblLocation {
+  background-image: url(/images/pages/home/lbl_location.gif);  
+  }*/
+
+
+
+div#map {
+  position: relative;
+  width: 930px;
+  height: 439px;
+  z-index: 100;
+  background-color: #aab699;
+  overflow: hidden;
+  }
+
+
+div#locationList {
+  top: 110px;
+  right: 21px;
+  }
+
+
+/* MAP FOOTER */  
+div#mapBottom {
+  position: relative;
+  width: 930px;
+  height: 173px;
+  border-top: 2px solid #383b3b;
+  background: #c25915 url(/images/pages/home/bg_map_bottom.gif) 0 0 no-repeat;
+  }
+  
+  
+
+div#mapLegend {
+  position: absolute;
+  left: 58px;
+  top: 19px;
+  width: 494px;
+  height: 70px;
+  }
+div#recentStory {
+  display: block;
+  position: absolute;
+  left: 300px;
+  top: 0;
+  width: auto;
+  height: 70px;
+  padding: 0 10px 0 0;
+  font-weight: bold;
+  background: transparent url(/images/pages/home/bg_recent.gif) 0 0 repeat-x;
+  white-space: nowrap;
+  }
+div#recentStory img {
+  top: 0;
+  width: 137px;
+  height: 11px;
+  margin-top: 21px;
+  }
+div#recentStory span {
+  display: block;
+  position: relative;
+  margin-top: 6px;
+  }
+
+div#recentStory div.end {
+  position: absolute;
+  right: -14px;
+  top: 0;
+  width: 14px;
+  height: 70px;
+  }
+div#mapLegend span a {
+  color: #38392d;
+  }  
+a#btnShareStory {
+  display: block;
+  position: absolute;
+  left: 707px;
+  top: 6px;
+  width: 178px;
+  height: 35px;
+  }
+
+/* MAP SHADOW PNG'S */
+
+div#mapTopShadow,
+div#mapBottomShadow {
+  position: absolute;
+  width: 930px;
+  top: 91px;
+  height: 36px;
+  background: transparent url(/images/pages/home/shad_top.png) 0 0 repeat-x;
+  z-index: 400;
+  }
+
+
+div#mapBottomShadow {
+  background: transparent url(/images/pages/home/shad_bottom.png) 0 0 repeat-x;
+  top: 494px;
+  }
+.worldwide{
+    background: url("/images/img-1.jpg") no-repeat scroll left top transparent;
+    float: left;
+    height: 91px;
+    text-decoration: none;
+    width: 326px;
+}
+.worldwide a{ 
+  text-decoration:none;
+  float: left;
+  height: 91px;
+  background:url(/images/img-1.jpg) left  top no-repeat; 
+  width: 326px;
+}
+.worldwide a:hover{ 
+  text-decoration:none; 
+  float: left;
+  height: 91px;
+  background:url(/images/img-1-hover.jpg) left  top no-repeat; 
+  width: 326px;
+}
+
+.login{ 
+  float:right; 
+  width:353px; 
+  height:91px; 
+  background:url(/images/loginbg_text.jpg) left top no-repeat;
+}
+.logintext{ 
+  font-family: "Helvetica Neue (T1)" Verdana, Geneva, sans-serif; 
+  font-size:15px; 
+  color:#999999; 
+  font-weight:bold; 
+  line-height:25px;
+}
+
+.login .input{ 
+  width:140px;
+  background:#709691; 
+  border:none; 
+  line-height:15px; 
+  padding-left:3px;
+  height: 15px;
+  vertical-align: super;
+  margin-top: 3px;
+}
+.browseby{ 
+  background:url(/images/browseby1.jpg) left top no-repeat; 
+  height:91px; 
+  width:221px; 
+  float:left; 
+  padding-left:32px;
+}
+.browseby li {
+  float: left;
+  height: 18px;
+  margin: 33px -40px;
+  padding-right: 51px;
+}
+.browseby ul li {
+list-style: none outside none;
+}
+.browseby li .image  {
+  height:18px;
+  margin: 0px auto;
+  display: block;
+  text-indent:-9999px;
+}
+.browseby li.map .image {
+    background-position: 0 1;
+    width: 42px;
+}
+.browseby li.filter .image {
+  background-position:-50px 1; 
+  width:70px;
+}
+.separator{
+  background:url(/images/map_seprator.png) right center no-repeat;
+}

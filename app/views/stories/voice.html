@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<vxml version="2.1"
+ xmlns="http://www.w3.org/2001/vxml">
+   <!-- fictitious user id. this should be established 
+       through a sign in module --> 
+   <var name="uid" expr="'12345'"/>
+
+   <form id="record_greeting">
+      <!-- the resulting recording is stored in the variable personal_greeting
+        the content cannot be copied into another variable. you may only
+        submit it to the server via the named variable -->
+      <record name="personal_greeting" 
+            maxtime="60s" dtmfterm="true" beep="true">
+         <prompt>
+            At the tone, please record your personal greeting. 
+            When you're done, press pound.
+         </prompt>
+
+         <!-- if the user doesn't say anything 
+            within finalsilence, catch the noinput -->
+         <noinput>
+         Sorry. I didn't hear you. Now returning to the main menu.
+         <exit />
+         </noinput>
+
+         <filled>
+             <!-- demo record shadow variables -->
+             <log>recording size = 
+                   <value expr="personal_greeting$.size"/> bytes.</log>
+             <log>recording duration = 
+                   <value expr="personal_greeting$.duration"/> milliseconds.</log>
+             <log>dtmf key = <value expr="(personal_greeting$.termchar 
+                   ? personal_greeting$.termchar : 'none')"/></log>
+             <log>maxtime = 
+                   <value expr="personal_greeting$.maxtime"/>.</log>
+         </filled>
+      </record>
+
+   <!-- confirm that we should commit the new recording -->
+      <field name="conf">
+         <prompt>
+            Here's what callers will hear.
+            <break size="small"/>
+            <audio expr="personal_greeting"/>
+            If you are happy with this greeting, say yes.
+            If you would like to re-record your greeting say no.
+            Otherwise, say cancel.
+         </prompt>
+
+         
+         <grammar mode="voice"
+         root="root_rule"
+         tag-format="semantics/1.0"
+         type="application/srgs+xml"
+         version="1.0"
+         xml:lang="en-US">
+                  <rule id="root_rule" scope="public">
+                           <one-of>
+                                    <item>
+                                             <one-of>
+                                                      <item>
+                                                               yes
+                                                      </item>
+                                                      <item>
+                                                               ok
+                                                      </item>
+                                                      <item>
+                                                               yeah
+                                                      </item>
+                                             </one-of>
+                                             <tag>out.conf = "yes";</tag>
+                                    </item>
+                                    <item>
+                                             <one-of>
+                                                      <item>
+                                                               no
+                                                      </item>
+                                                      <item>
+                                                               nope
+                                                      </item>
+                                             </one-of>
+                                             <tag>out.conf = "no";</tag>
+                                    </item>
+                                    <item>
+                                             <one-of>
+                                                      <item>
+                                                               cancel
+                                                      </item>
+                                             </one-of>
+                                             <tag>out.conf = "cancel";</tag>
+                                    </item>
+                           </one-of>
+                  </rule>
+
+         </grammar>
+
+         
+         <catch event="noinput">
+            Recording canceled. 
+            Now returning you to the main menu.
+            <exit />
+         </catch>
+
+         <catch event="nomatch">
+            Please say yes to establish the new greeting, 
+            say no to re-record, or say cancel to quit.
+         </catch>
+
+         <filled>
+            <if cond="'no' == conf">
+               <clear namelist="personal_greeting conf"/>
+               <goto next="#record_greeting"/>
+            <elseif cond="'cancel' == conf"/>
+               <exit />
+            <else/>
+               saving your personal greeting
+            </if>
+         </filled>
+      </field>
+
+      <!-- submit the data to the fictitious voice mail server -->
+      <subdialog name="oResult" src="http://www.telco.com/greetings/upload.cgi" 
+         namelist="personal_greeting uid" method="post">
+         <filled>
+         <if cond="oResult.code">
+           Greeting saved
+         <else/>
+           Error saving greeting
+           <log><value expr="oResult.msg"/></log>
+         </if>
+         </filled>
+      </subdialog>
+      
+      <!-- FOR TESTING: play the greeting on the server -->
+      <block>
+         <audio expr="uid + '.wav'">your greeting</audio>
+      </block>
+      
+   </form>
+</vxml>

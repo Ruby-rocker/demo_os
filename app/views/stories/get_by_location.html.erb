@@ -1,0 +1,42 @@
+<ul class="results">
+  
+  <li class="title label">Story Title</li>
+  <li class="date label">Date</li>
+  <li class="views label">Views</li>
+
+ <% if @stories.size > 1  %>
+    <% @stories.each do |story| %>
+      <% if params[:action] == "index"%>
+        <% if session[:story_id].include?(story.id)%>
+          <li class="title"><%= link_to story.title, (story.anonymous ? "/anonymous/#{story.path}" : "/#{story.user_login}/#{story.path}"), :class => 'story' %></li>
+          <li class="date"><%= story.created_at.strftime('%x') %></li>
+          <li class="views"><%= story.count %></li>
+        <%end%>
+      <%else%>
+        <li class="title"><%= link_to story.title, (story.anonymous ? "/anonymous/#{story.path}" : "/#{story.user_login}/#{story.path}"), :class => 'story' %></li>
+        <li class="date"><%= story.created_at.strftime('%x') %></li>
+        <li class="views"><%= story.count %></li>
+      <%end%>
+    <% end -%>
+  <% else -%>
+      <% @stories.each do |story| %>
+        <% if params[:action] == "index"%>
+          <% if session[:story_id].include?(story.id)%>
+            <li class="title"><%= link_to story.title, (story.anonymous ? "/anonymous/#{story.path}" : "/#{story.user_login}/#{story.path}"), :class => 'story' %></li>
+            <li class="date"><%= story.created_at.strftime('%x') %></li>
+            <li class="views"><%= story.count %></li>
+          <%end%>
+        <%else%>
+          <li class="title"><%= link_to story.title, (story.anonymous ? "/anonymous/#{story.path}" : "/#{story.user_login}/#{story.path}"), :class => 'story' %></li>
+          <li class="date"><%= story.created_at.strftime('%x') %></li>
+          <li class="views"><%= story.count %></li>
+        <%end%>
+      <% end -%>
+  <% end -%>
+    
+</ul>
+<script type="text/javascript">
+//<![CDATA[
+  $$('a.story').each(function(el,idx) { OneStory.StoryLinks.add(el,idx) });
+//]]>
+</script>

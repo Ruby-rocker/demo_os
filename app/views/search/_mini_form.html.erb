@@ -1,0 +1,16 @@
+<% form_tag(search_path, :method => :get) do %>
+	<table width="80%" cellspacing="2" cellpadding="0" border="0">
+		<tbody>
+			<tr>
+				<td class="logintext" align="center" style="font-weight:normal;width:49%"></td>
+				<td><%= text_field_tag :keywords, '', :id => 'keywordsMini', :class => "input" %><td/>
+				<td valign="middle" align="right" rowspan="2"><%= submit_tag 'Go', :id => 'btn_go', :class => 'image' %></td>
+			</tr>
+			<tr>
+				<td align="center" class="logintext" style="font-weight: normal;"></td>
+				<td><%= text_field_tag :location, '', :id => 'locationMini', :class => "input" %></td>
+			</tr>
+		</tbody>
+	</table>
+	<%#= submit_tag 'Go', :id => 'btn_go', :class => 'image' %>
+<% end -%>

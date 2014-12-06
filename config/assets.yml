@@ -1,0 +1,19 @@
+package_assets:         on          # (on, off, always)
+embed_assets:           on          # (on, off, datauri)
+compress_assets:        on          # (on, off)
+gzip_assets:            on          # (on, off)
+javascript_compressor:  closure     # (yui, closure)
+
+javascripts:
+  common:
+    - public/javascripts/mootools.js
+    - public/javascripts/mootils.js
+    - public/javascripts/onestory.js
+    - public/javascripts/libs/validator.js
+  maps:
+    - public/javascripts/resultwin.js
+    - public/javascripts/markermanager.js
+    
+stylesheets:
+  common:
+    - public/stylesheets/styles.css

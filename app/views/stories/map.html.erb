@@ -1,0 +1,29 @@
+
+<div id="map"></div>
+
+<%= render :partial => 'layouts/result_win' %>
+
+<script type="text/javascript">
+//<![CDATA[
+  
+  function load() {
+    if (GBrowserIsCompatible()) {
+	    OneStory.Maps.set(setupMap());
+      OneStory.Locations.getLocations({ limit: 999999, offset: 0, callback: OneStory.ResultWindow.show }, 40);
+    }
+  }
+  
+  function setupMap() {
+    var map = new google.maps.Map2(document.getElementById('map'), { mapTypes: [ G_PHYSICAL_MAP, G_NORMAL_MAP, G_SATELLITE_MAP ], backgroundColor: '#ffffff' });
+    map.setCenter(new google.maps.LatLng(23, 0), 2);
+    // map.addControl(new GLargeMapControl(), new GControlPosition(G_ANCHOR_TOP_RIGHT, new GSize(16, 36)));
+    // map.addControl(new GMenuMapTypeControl(), new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(26, 36)));    
+    // map.enableDoubleClickZoom();
+    return map;
+  }
+  
+  window.addEvent('load', load);
+  window.addEvent('unload', GUnload);
+  
+//]]>
+</script>

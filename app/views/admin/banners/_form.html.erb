@@ -1,0 +1,17 @@
+<% form_for(@banner, :url => admin_banners_path, :html => { :multipart => true }) do |f| %>
+	<div>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+	</div>
+	<div>
+		<%= f.label :status %>
+		<%= f.check_box :status %>
+	</div>
+	<div>
+		<%= f.label :photo %>
+		<%= f.file_field :photo %>
+	</div>
+	<div>
+		<%= button_to "Submit", admin_banners_path, :method => 'post', :class => "btnImage" %>
+	</div>
+<%end%>

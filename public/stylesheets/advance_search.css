@@ -1,0 +1,120 @@
+.middle{ float:left; width:930px; height: 441px; background:#010101; }
+
+
+.mid_top{ float:left; width: 931px; height:auto; position:relative; }
+.mid_center{ float:left; overflow-y: scroll; overflow-x: hidden;  height:353px;  width:931px;}
+.mid_bottom{ float:left; width:100%; height:auto; }
+
+.Keywordbg{ background:#309b00; line-height:35px; font-family:Verdana, Geneva, sans-serif; font-size:12px; padding-left:11px; padding-right:11px; width:200px; float:left; border-left:#313425 solid 1px; text-align: center; }
+.Genderbg{ background:#309b00; line-height:35px; font-family:Verdana, Geneva, sans-serif; font-size:12px; padding-left:11px; padding-right:11px; width:92px; float:left; border-left:#313425 solid 1px; text-align: center;}
+
+.agebg{ background:#309b00; line-height:35px; font-family:Verdana, Geneva, sans-serif; font-size:12px; padding-left:11px; padding-right:11px; width:82px; float:left; border-left:#313425 solid 1px; text-align: center;  }
+
+.locationbg{ background:#309b00; line-height:35px; font-family:Verdana, Geneva, sans-serif; font-size:12px; padding-left:11px; padding-right:11px; width:140px; float:left; border-left:#313425 solid 1px; text-align: center; }
+
+.Storiesbg{ background:#309b00; line-height:35px; font-family:Verdana, Geneva, sans-serif; font-size:12px; padding-left:11px; padding-right:11px; width:122px; float:left; border-left:#313425 solid 1px; text-align: center;}
+
+.datebg{ background:#309b00; line-height:35px; font-family:Verdana, Geneva, sans-serif; font-size:12px; padding-left:11px; padding-right:11px; width:157px; float:left; border-left:#313425 solid 1px; text-align: center; }
+
+
+.sorted_keyword{ width:223px; float:left;  height:100%;   }
+.Keywords{ width:223px; float:left;  height:100%; padding-top: 56px; text-align: center;  }
+.Gender{ width:115px; float:left;  height:100%; margin-top: 15px; text-align: center;}
+.age{ width:105px; float:left;  height:100%; text-align: center; color: #709691; font-size: 14px; padding-top: 15px;}
+.location{ width:163px; float:left; height:100%; text-align: center; color: #709691; font-size: 14px; padding-top: 15px;}
+.Stories{ width:145px; float:left;  height:100%; text-align: center; color: #709691; font-size: 14px; padding-top: 15px;}
+.date{ width:137px; float:left;  height:100%; text-align: center; color: #709691; font-size: 14px; padding-top: 15px;}
+.age p:hover{ color:#ff5000;  text-decoration: underline; cursor: pointer;}
+.location p:hover{ color:#ff5000;  text-decoration: underline; cursor: pointer;}
+.Stories p:hover{ color:#ff5000;  text-decoration: underline; cursor: pointer;}
+.date p:hover{ color:#ff5000;  text-decoration: underline; cursor: pointer;}
+.atoz{ background:#544b3b; background: none repeat scroll 0 0 #544B3B;
+    color: #AEAEAE;
+    float: left;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 12px;
+    height: 35px;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left: 13px;
+    position: absolute;
+    top: 35px;
+    width: 210px;
+    z-index: 50;}
+
+.atoz a{   color: #AEAEAE;  text-decoration:none;}
+.atoz a:hover{  color:#ffcc00;  text-decoration: underline;}
+
+
+.whitetext{  font-family:Verdana, Geneva, sans-serif; font-size:13px; color:#aeaeae; line-height:25px;}
+.whitetext a{  color:#ccc;  text-decoration:none;}
+.whitetext:hover{  color:#ff5000;  text-decoration: underline; cursor: pointer;}
+.Gender1{text-align:center; border-left:#313425 solid 1px; background-image:url('../images/both1.jpg'); height: 85px; background-position: center top; background-repeat: no-repeat; width: 100%}
+.Gender1:hover img{ visibility:hidden; cursor: pointer;}
+.Gender1show img{ visibility:hidden; }
+.Gender2{text-align:center; border-left:#313425 solid 1px; background-image:url('../images/male_hover.png'); height: 130px;  background-position: center top; background-repeat: no-repeat; width: 100%;}
+.Gender2:hover img{ visibility:hidden; cursor: pointer;}
+.Gender2show img{ visibility:hidden; }
+.Gender3{ text-align:center; border-left:#313425 solid 1px; background-image:url('../images/female_hover.png'); height: 115px; background-position: center top; background-repeat: no-repeat; width: 100%; }
+.Gender3:hover img{ visibility:hidden; cursor: pointer;}
+.Gender3show img{ visibility:hidden; }
+
+.whitetext18{  font-family:Verdana, Geneva, sans-serif; font-size:18px; color:#aeaeae; line-height:35px; border-left:#313425 solid 1px; }
+.whitetext18 a{  color:#ff5000;  text-decoration:none;}
+.whitetext18:hover{  color:#ff5000;  text-decoration: underline; cursor: pointer;}
+.bluetext{  font-family:Verdana, Geneva, sans-serif; font-size:14px; color:#709691; line-height:25px; font-weight:bold; padding-top:15px; border-left:#313425 solid 1px; }
+.bulebg{ width:68px; line-height:22px; background:#709691; padding-left:5px; font-family:Verdana, Geneva, sans-serif; color:#000; font-size:12px; margin:10px 0 10px 22px; border-left:#313425 solid 1px; float:left; }
+
+
+.whitetext2{  font-family:Verdana, Geneva, sans-serif; font-size:13px; color:#ccc; line-height:25px; border-left:#313425 solid 1px; width:200px; }
+.whitetext2 a{  color:#ff5000;  text-decoration:none;}
+.whitetext2:hover{  color:#ff5000;  text-decoration: underline; cursor: pointer;}
+
+.whitetext1{  font-family:Verdana, Geneva, sans-serif; font-size:13px; color:#ccc; line-height:25px; border-left:#313425 solid 1px; }
+.whitetext1 a{  color:#ccc;  text-decoration:none;}
+.whitetext1:hover{  color:#ff5000;  text-decoration: underline; cursor: pointer;}
+
+.whitetext3{  font-family:Verdana, Geneva, sans-serif; font-size:13px; color:#ccc; line-height:25px; border-left:#313425 solid 1px; }
+.whitetext3 a{  color:#ccc;  text-decoration:none;}
+.whitetext3:hover{  color:#ff5000;  text-decoration: underline; cursor: pointer;}
+
+.whitetext4{  font-family:Verdana, Geneva, sans-serif; font-size:13px; color:#ccc; line-height:25px; border-left:#313425 solid 1px; }
+.whitetext4 a{  color:#ccc;  text-decoration:none;}
+.whitetext4:hover{  color:#ff5000;  text-decoration: underline; cursor: pointer;}
+
+.whitetext12{  font-family:Verdana, Geneva, sans-serif; font-size:13px; color:#ccc; line-height:25px; border-left:#313425 solid 1px; }
+.whitetext12 a{  color:#ccc;  text-decoration:none;}
+.whitetext12 p:hover{  color:#ff5000;  text-decoration: underline; cursor: pointer;}
+
+.greenimage{ background:url(../images/greenimg.jpg) left top no-repeat; width:931px; height:54px;  float:left;}
+.submitsearch-btn{  float:right; margin-right:35px; margin-top:12px;}
+
+.date_view { float: left; width: 185px; }
+.year { float: left; width: 63px; }
+.month { color: #ccc; float: left; margin-top: 5px; width: 73px; display: none; }
+.month .month_view p:hover{ color: #ff5000; text-decoration: underline; cursor: pointer;}
+.day { color: #ccc; float: left; width: 39px; display: none;}
+.month .month_view:hover{ color:#ff5000; text-decoration: underline; cursor: pointer;}
+.day .day_view:hover{ color:#ff5000; text-decoration: underline; cursor: pointer;}
+.whitetext12 .yearshow { color: #ff5000;}
+.month .monthshow { color: #ff5000; }
+.day .dayshow { color: #ff5000; }
+.view{ color: #ccc; }
+.day_view { color: #ccc; }
+.month_view { color: #ccc; }
+.icon {  width:760px; float:left; height:34px;}
+.icon_parent {float:left; height:34px; width: 30%;margin-left: 55px;}
+.icon1{ float:left; width:25px; padding-top:30px; padding-left: 60px; }
+.icon2{ float:left; width:25px; padding-top:30px; }
+.icon3{ float:left; width:25px;}
+#viewyear { line-height: 25px; }
+
+.curve{ border:5px solid #222428; border-radius:10px; -moz-border-radius:10px; width:280px; /* Old Firefox */ background:#787b6a; float:left; padding:15px 15px 15px 15px; margin-top:19px; margin-left: 55px;}
+.curveimg{ float:left; width:36px; }
+.curvetext{font-family: "Helvetica LT Std" Arial, Helvetica, sans-serif; color:#FFF; font-size:13px; float:left;  line-height:35px;}
+.curve1{ border:5px solid #222428; border-radius:10px; -moz-border-radius:10px; width:198px; /* Old Firefox */ background: #FFF; float:left; padding:15px 15px 15px 15px; margin-top:19px; margin-right:20px;}
+.curvetext1{font-family: "Myriad Pro" Verdana, Geneva, sans-serif; color: #000; font-size:12px; float:left;  line-height:18px;}
+.curvetext2{font-family: Verdana, Geneva, sans-serif; color: #383a2b; font-size:12px; float:left;  line-height:18px;}
+
+.inner_title{  padding:10px 0px 28px 0px; font-family:Verdana, Geneva, sans-serif; font-size:24px; color:#79795e;}
+.active_story{color: #ff5000}

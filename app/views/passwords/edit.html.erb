@@ -1,0 +1,18 @@
+<%= image_title("pages/account/password_recovery.gif", "Forgot Password") %>
+<div style="width: 50%;">
+<% form_tag save_new_password_path(params[:id]) do %>
+<ul>
+  <li>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %><br />
+  </li>
+  <li>
+    <%= label_tag :password_confirmation, "Confirm Password" %>
+    <%= password_field_tag :password_confirmation %><br />
+  </li>
+  <li>
+    <%= submit_tag "Reset Your Password" %>
+  </li>
+</ul>    
+<% end %>
+</div>

@@ -1,0 +1,17 @@
+<%= render :partial => 'users/account_header' %>
+
+<h1><%=@selected.subject%></h1>
+
+<div class="buzz_list">
+  <% @buzztree.each do |buzz|%>
+    <% div_for buzz do %>
+      <span class="buzz_title">From: <%= link_to buzz.from.login, "/search/author/#{buzz.from.login}" %></span><br/>
+      <span class="buzz_body"><%= buzz.body %></span>
+    <% end %>
+  <% end %>        
+</div>
+
+<h2>Reply to Buzz</h2>
+<div id="buzz_reply">
+  <%= render :partial => 'buzzs/form'%>
+</div>

@@ -1,0 +1,42 @@
+div#content {
+  padding: 8px 0 70px 0;
+  }
+div#contact {
+  width: 420px;
+  margin-left: 41px;
+  }
+div#contact h1 {
+  height: 31px;
+  background-position: left bottom;
+  background-image: url(/images/pages/contact/contact_us.gif);
+  }
+  
+ul#contactFormFields {
+  
+  }
+  
+ul#contactFormFields li label,  
+ul#contactFormFields li input,
+ul#contactFormFields li textarea {
+  clear: both;
+  }
+ul#contactFormFields li label {
+  width: 100%;
+  text-align: left;
+  }
+ul#contactFormFields li input[type=text] {
+  width: 322px;
+  }
+ul#contactFormFields li textarea {
+  width: 387px;
+  } 
+ul#contactFormFields li.buttons {
+  height: 40px;
+  }
+ul#contactFormFields li.buttons input {
+  position: absolute;
+  left: auto;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+ }

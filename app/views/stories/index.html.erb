@@ -1,0 +1,9 @@
+<%= link_to new_story_path(current_user), "Submit A New Story", :id => "btnSubmitLg", :class => "image" if authorized? %>
+    
+  <div id="archive" class="archiveList">
+      
+  	<h2 class="image">Story Archive</h2>
+    
+    <%= render :partial => 'stories/archive', :locals => { :stories => @stories } %>
+    
+	</div>

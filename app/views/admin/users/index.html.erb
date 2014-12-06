@@ -1,0 +1,75 @@
+<%= image_title "admin/titles/user_list.gif", "User List" %>
+
+<%= will_paginate @users %>
+
+<ul class="table five">
+  <li class="headings">
+    <ul>
+      <li>Name</li>
+      <li>Email</li>
+      <li>Location</li>
+      <li>Stories</li>
+      <li>Options</li>
+    </ul>
+    <br class="clear" />
+  </li>  
+  <li class="data">
+    <% if @users.empty? %>
+		  <p>There are no @users..</p>
+  	<% else -%>
+  		<% @users.each_with_index do |user,index| %>
+        <ul class="item <%= list_color(index) %>">
+          <li><%= link_to user.login, admin_user_path(user) %></li>
+          <li><%= user.email %></li>
+          <li><%= user.location %></li>
+          <li><%= user.stories.length %></li>
+          <li>
+            <%= link_to 'edit', edit_admin_user_path(user) %> / 
+            <%= link_to 'delete', admin_user_path(user), :method => 'delete', :confirm => 'Are you sure you want to delete this user and all of their stories?' %>
+          </li>
+        </ul>
+      <% end -%>
+    <% end -%>
+    
+    <br class="clear" />
+  </li>  
+</ul>
+
+<br/>
+
+<%= image_title "admin/titles/plotting_users.gif", "Plotting Users" %>
+
+<div id="map" style="width: 680px; height: 400px; margin: 0 0 60px 40px; border: 1px solid #777;"></div>
+
+<script type="text/javascript">
+//<![CDATA[
+ 	
+ 	var users = [];
+
+	<% @users.each do |user| %>
+		<%= "users.push({ geocode: { id: #{user.id}, title: \"#{h user.login}\", latitude: #{user.geocode.latitude}, longitude: #{user.geocode.longitude} } });" if user.geocode && user.geocode.latitude && user.geocode.longitude %>
+	<% end -%>
+
+  function load() {
+    if (GBrowserIsCompatible()) {
+    	OneStory.Maps.set(setupMap());
+    	//OneStory.Markers.addMarkers(users, { callback: OneStory.Markers.showInfo });
+        OneStory.Locations.getLocations({ limit: 1000, showRecent: true, callback: OneStory.Markers.showInfo }, 40);
+    }
+  }
+  
+  function setupMap() {
+    var map = new google.maps.Map2(document.getElementById('map'), { mapTypes: [ G_PHYSICAL_MAP, G_NORMAL_MAP, G_SATELLITE_MAP ], backgroundColor: '#ffffff' });
+    map.setCenter(new google.maps.LatLng(23, 0), 2);
+    // map.addControl(new GLargeMapControl(), new GControlPosition(G_ANCHOR_TOP_RIGHT, new GSize(16, 36)));
+    // map.addControl(new GMenuMapTypeControl(), new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(26, 36)));    
+    // map.enableDoubleClickZoom();
+    return map;
+  }
+  
+  window.addEvent('load', load);
+  window.addEvent('unload', GUnload);
+  
+
+//]]>
+</script>

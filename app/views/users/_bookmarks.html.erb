@@ -1,0 +1,33 @@
+<% options = options || {} %>
+
+<ul class="archive">
+	
+	<% if @bookmarks.empty? %>
+		
+		<li class="title">There are no bookmarks..</li>
+		
+	<% else -%>
+
+		<% @bookmarks.group_by(&:month).each do |month, items| %>
+			
+			<li class="title"><%= month %></li>
+
+		  <% items.each do |bookmark| %>
+		  <li>
+		    <ul class="items">  
+		      <li class="title"><%= link_to bookmark.story.title, bookmark.story.link_path, :class => 'story' %></li>
+		      <li><%= search_link 'location', bookmark.story.location %></li>
+		      <li><%= bookmark.created_at.strftime('%B %d, %Y').gsub(/(\s0)/, ' ') %></li>
+		            
+		      <% if authorized? %>
+			      <li>
+			      	<%= link_to 'delete bookmark', delete_bookmark_path(bookmark.user, bookmark), :confirm => 'Are you sure you want to delete this bookmark?', :method => :delete %>
+				    </li>
+		      <% end -%>  
+		    </ul>
+		  </li>
+		  <% end -%>
+		<% end -%>
+	<% end -%>
+
+</ul>

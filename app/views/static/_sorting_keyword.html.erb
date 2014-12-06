@@ -1,0 +1,34 @@
+<input type='hidden' name='hdn_keyword' value="">
+<% i = 1%>
+<% @tags.each do |tag| %>
+  <%if params[:action] == "index"%>
+    <p class='whitetext' id='white_<%=i%>' value='<%= tag %>' onclick = "multiple_keyword(<%=i%>)"><%= tag.name.downcase %></p>
+  <%elsif params[:action] == "advance_search"%>
+    <p class='whitetext' id='white_<%=i%>' value='<%= tag %>' onclick = "multiple_keyword(<%=i%>)"><%= tag.name.downcase %></p>
+  <%else%>
+    <p class='whitetext' id='white_<%=i%>' value='<%= tag %>' onclick = "multiple_keyword(<%=i%>)"><%= tag %></p>
+  <%end%>
+  <%i = i+1 %>
+<% end %>
+<script type="text/javascript">
+	jQuery('.whitetext').click(function() {
+	
+  	})
+  	function multiple_keyword(id){
+  		var a = "#white_" + id;
+  		var b = jQuery(a).text();
+  		var c = jQuery('[name=hdn_keyword]').val();
+  		if(c.length > 0){
+        if(c.search(b) != -1) {
+          jQuery('[name=hdn_keyword]').val(c);
+        }
+        else{
+          jQuery('[name=hdn_keyword]').val(c + "," + b);
+        }
+  		}
+  		else{
+  			jQuery('[name=hdn_keyword]').val(b);	
+  		}
+  		jQuery(a).css('color', '#ff5000')
+  	}
+</script>

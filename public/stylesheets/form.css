@@ -1,0 +1,263 @@
+form,
+form fieldset,
+form ul li {	
+	clear: both;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  }
+form legend {
+  font-size: 16px;
+  }
+form ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	}
+form ul li {
+	display: block;
+	position: relative;
+	margin: 0;
+ 	padding: 3px 0 7px 0;
+  }
+form ul li br {
+  clear: both;
+  }
+form ul li label {
+	clear: none;
+	float: left;
+	width: 36%;
+	margin-right: 15px;
+  padding: 4px 0 2px 0;
+  text-align: right;
+	}
+	
+form ul li input,
+form ul li textarea,
+form ul li select {
+	position: relative;
+  float: left;
+  width: 52%;
+  margin: 0;
+  outline-width: 0;
+  padding: 2px 5px 2px 5px;
+  border: 1px solid #73928f;
+  background-color: #73928f;
+  font-size: 12px;
+  color: #fff;
+  }
+	
+form ul li input:active,
+form ul li textarea:active,
+form ul li select:active,
+form ul li input:focus,
+form ul li textarea:focus,
+form ul li select:focus {
+  background-color: #78A19D;
+  border: 1px solid #3F6E69;
+}
+
+form ul li select {
+	color: #fff;
+	height: 25px;
+  }
+form ul li textarea {
+  padding: 11px;
+  }
+
+/*  RADIO BTNS   */
+/*****************/
+form ul li.radioLabel {
+	display: block;
+	position: relative;
+  float: left;
+	width: 35%;
+	padding-right: 20px;
+  }
+form ul li.radioLabel label {
+	width: 100%;
+	margin-right: 0;
+	}
+form ul li.radio label {
+  display: block;
+  width: 100%;
+  float: none;
+  padding: 4px 0 2px 0;
+  white-space: nowrap;
+  text-align: left;
+  }
+form ul li.radio {  
+  clear: none;
+  float: left;
+  width: 25%;
+  height: auto;
+  }
+form ul li.radio input,
+form ul li.checkbox input {
+  width: 12px;
+  margin: 4px 7px 0 0;
+  background-color: transparent;
+  border: 0;
+  }
+form ul li.radio label { 
+  display: block;
+  float: none;
+  left: auto;
+  width: auto;
+  margin: 0;
+  }
+  
+ 
+/*  CHECKBOXES   */
+/*****************/  
+form ul li.checkbox {
+  left: 35%;
+  width: 53%;
+  padding-left: 20px;
+  }
+form ul li.checkbox label {
+  width: auto;
+  float: left;
+  text-align: left;
+  font-size: 10px;
+  white-space: nowrap;
+  }
+  
+
+
+
+ 
+/*    BUTTONS    */
+/*****************/
+
+
+form ul li.buttons {
+  position: relative;
+  margin-top: 10px;
+  }
+
+
+a.button,
+form button,
+form input[type=submit] {
+  left: 33%;
+  width: auto;
+  margin: 20px 0 0 0;
+  padding: 5px 9px 5px 9px;
+  cursor: pointer;
+  font-size: 12px;
+  border: 1px solid #466815;
+  background-color: #466815;
+  color: #bbb;
+  text-transform: uppercase;
+	border-radius: 11px;
+  -moz-border-radius: 11px;
+  -webkit-border-radius: 11px;  
+  }
+  
+
+a.button:hover,
+form button:hover,
+form input[type=submit]:hover {
+  background-color: #4e7517;
+  color: #fff;
+  }  
+a.button:active,
+form button:active,
+form input[type=submit]:active {
+  background-color: #3d5c12;
+  color: #ccc;
+  }  
+  
+form ul li label.value {
+  display: block;
+  width: 53%;
+  margin: 0;
+  font-size: 12px;
+  }
+
+form ul li span.legend {
+  float: none;
+  display: block;
+  position: relative;
+  width: 53%;
+  left: 33%;
+  margin: 20px 0 0 20px;
+  text-align: left;
+  }  
+form input.hidden {
+  clear: none;
+  display: none;
+  }  
+form ul li label.image,
+form button.image,
+form input[type=submit].image {
+	background-color: transparent;
+	border: 0;
+	}
+	
+	
+div.errorExplanation {
+	padding: 0 0 20px 0;
+	}
+div.errorExplanation h2 {
+	margin-bottom: 6px;
+	font-size: 13px;
+	}
+div.errorExplanation ul {
+	padding: 0 0 0 25px;
+	list-style-type: square;
+	}
+#story_media{
+  background-color:transparent;
+  border:none;
+  margin-top: 12px;
+}
+
+
+
+
+
+body {
+  /*margin-left:50px;
+  margin-top:20px;*/
+}
+#FileUpload {
+    position:relative;
+}
+
+#BrowserVisible {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    background:url(http://i.stack.imgur.com/PaT3a.png) 100% 1px no-repeat;
+    width:345px;
+    height:30px;
+    margin-left: 270px;
+    margin-top: 10px;
+}
+
+#FileField {
+    width:150px;
+    margin-right:85px;
+  padding: 6px;
+    font-size: 13px;
+    background: #fff url('http://i.stack.imgur.com/CGQD7.gif') top left repeat-x;
+    border: 1px solid #d5d5d5;
+  color: #333;
+  border-radius: 4px 4px 4px 4px !important;
+}
+
+#BrowserHidden {
+    position:relative;
+    width:345px;
+  height:30px;
+    text-align: right;
+    -moz-opacity:0;
+    filter:alpha(opacity: 0);
+    opacity: 0;
+    z-index: 2;
+  
+}

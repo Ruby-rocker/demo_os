@@ -1,0 +1,53 @@
+
+<%= will_paginate @stories %>
+
+<ul class="table five">
+  <li class="headings">
+    <ul>
+      <li>Title</li>
+      <li>Author</li>
+      <li>Location</li>
+      <li>Status</li>
+      <li># of Likes</li>
+      <li>Options</li>
+    </ul>
+    <br class="clear" />
+  </li>  
+  <li class="data">
+    <% if @stories.empty? %>
+		  <ul class="item gray">
+        <li style="width: 668px;">There are no stories..</li>
+      </ul>
+  	<% else -%>
+  		
+  		<% @stories.each_with_index do |story,index| %>
+        <ul class="item <%= list_color(index) %>">
+          <li class="expandable"><%= link_to story.title, story_path(story.user, story), :class => 'story' %></li>
+          <li><%= link_to story.user.login, admin_user_path(story.user) %></li>
+          <li class="expandable"><span><%= story.pin_location || 'n/a' %></span></li>
+          <li>
+            <%= story.published ? "published" : "draft" %>
+          </li>
+          <li>
+            <%= story.likes.count %>
+          </li>          
+          <li>
+            <% if story.featured? %>
+              <%= link_to "unfeature", unfeature_admin_story_path(story.id), :confirm => 'Are you sure you want to un-feature this story?' %>
+            <% else %>
+              <%= link_to "feature", feature_admin_story_path(story.id), :confirm => 'Are you sure you want to feature this story?' %>
+            <% end %>
+             / 
+            <% if story.published? %>          
+              <%= link_to "unpublish", unpublish_admin_story_path(story.id), :confirm => 'Are you sure you want to un-publish this story?' %>
+            <% else %>
+              <%= link_to "publish", publish_admin_story_path(story.id), :confirm => 'Are you sure you want to publish this story?' %>
+            <% end %>
+            
+          </li>
+        </ul>
+      <% end -%>
+    <% end -%>    
+    <br class="clear" />
+  </li>  
+</ul>

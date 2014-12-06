@@ -1,0 +1,80 @@
+<%= error_messages_for :user %>
+
+<% @user.password = @user.password_confirmation = nil %>
+
+<% form_for(@user) do |f| %>
+<ul>
+	<li>
+		<%= f.label :login, 'Username*' %>
+	  <%= f.text_field :login, :class => 'required' %><br/>
+	</li>
+	<li>
+	  <%= f.label :city %>
+	  <%= f.text_field :city %><br/>
+	</li>
+	<li>
+	  <%= f.label :state %>
+	  <%= f.text_field :state %><br/>
+	</li>
+	<li>
+	  <%= f.label :country %>
+	  <%= f.text_field :country %><br/>
+	</li>
+	<li>
+	  <%= f.label :email, 'Valid Email*' %>
+	  <%= f.text_field :email, :class => 'required email' %><br/>
+	</li>
+	<li>
+	  <%= f.label :password, 'Password*' %>
+	  <%= f.password_field :password, :class => 'required' %><br/>
+	</li>
+	<li>
+	  <%= f.label :password_confirmation, 'Retype Password*' %>
+	  <%= f.password_field :password_confirmation, :class => 'required' %><br/>
+	</li>
+	<li>
+  	<label style = "margin-top:40px">Enter Captcha*</label>
+    <%= show_simple_captcha %>
+   
+	</li>
+	<li>
+		<span class="legend">* required fields</span>
+	</li>
+	<li class="checkbox">
+	  <%= f.check_box :agreed, :class => 'required' %>
+	  <%= f.label :agreed, "Yes! I have read and understand the<br/>One Story Road #{link_to("Terms & Conditions", "terms", :class => 'popup')}", :id => 'lblAgree', :for => 'user_agreed' %>
+  </li>
+	<li class="buttons">
+		<%= f.hidden_field :ip_address, :value => request.remote_ip, :class => 'hidden' %>
+		<%= submit_tag "Sign Up", :onclick  => "valid_captcha()" %><br/>
+	</li>
+</ul>
+<% end -%>
+<script type="text/javascript">
+	function change_captcha_display(){
+		jQuery("#simple_captcha").css("margin-left", "135px");
+		jQuery("#simple_captcha").css("margin-top", "10px");
+		jQuery("#simple_captcha").css("border", "none");
+		jQuery("#simple_captcha .simple_captcha_field input").css("width","174px");
+		jQuery("#simple_captcha .simple_captcha_field input").css("background-color","#73928F");
+		
+		
+}
+window.onload = change_captcha_display;
+	function valid_captcha()
+	{
+	var x=document.getElementById("captcha").value;
+	
+		if (x == "")
+		{
+		
+	  jQuery("#simple_captcha .simple_captcha_field input").after("<img src='/images/error_icon.png' style='display:block;float:left;'>");
+	  }	
+	  else
+	 	{
+	 	
+	 	jQuery("#simple_captcha .simple_captcha_field input").after("<img src='/images/error_icon.png' style='display:none;float:left;'>");
+	 	} 	
+	}
+	
+</script>

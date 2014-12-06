@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+	<%= render :partial => 'layouts/metatags' %>
+	
+	<% if @story %>
+  	<title><%= "#{h @story.title} - One Story Road" %></title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="<%= @story.tags.collect{|tag| tag.name }.join(", ") %>" />
+  <% else %>
+  	<title>One Story Road</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+  <% end %>
+  <% if params[:action] == "slideshow"%>
+    <% if !@story_slide.body.nil? %>
+      <% if @story_slide.body['<img'].blank? %>
+        <meta content="<%= request.protocol %><%= request.host_with_port %>/images/onestorylogo6.jpg" property="og:image" />
+        <meta content="<%= request.protocol %><%= request.host_with_port %>/slideshow/<%=@story_slide.id%>" property="og:url">
+        <meta content="<%=@story_slide.title%>" property="og:title">
+      <%else%>
+        <meta content="<%=@story_slide.title%>" property="og:title">
+      <%end%>
+    <%else%>
+      <meta content="<%= request.protocol %><%= request.host_with_port %>/images/onestorylogo6.jpg" property="og:image" />
+      <meta content="<%=@story_slide.title%>" property="og:title">
+    <%end%>
+  <%else%>
+    <% if !@story.body.nil? %>
+      <% if @story.body['<img'].blank? %>
+        <meta content="<%= request.protocol %><%= request.host_with_port %>/images/onestorylogo6.jpg" property="og:image" />
+      <%end%>
+    <%else%>
+      <meta content="<%= request.protocol %><%= request.host_with_port %>/images/onestorylogo6.jpg" property="og:image" />
+    <%end%>
+  <%end%>
+  <%= stylesheet_link_tag 'pages/story/styles', :media => 'all' %>
+  <%= stylesheet_link_tag 'pages/story/print', :media => 'print' %>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <% if params[:controller] == "stories" && (params[:action] == "new" && params[:action] == "edit" &&  params[:action] == "create") %>
+    <%= javascript_include_tag ['mootools','mootils','onestory','libs/validator', 'swfobject'] %>
+  <%end%>
+		
+</head>
+
+<body>
+
+	<div id="container" class ="story_inner">
+		<%if params[:action] == "slideshow"%>
+      <div id="header" style = "background-image:none;background:none;">
+    <%else%>
+      <div id="header">
+    <%end%>
+    	<%= link_to "close", root_path, :id => 'btnX', :class => 'image' %>
+    	<%= link_to "One Story Road", root_path, :id => 'logo' %>
+		</div>
+		<div id="content">
+      
+    	<% if @story && !@story.published? %>
+        <div class="notice">
+          <p>This story has not been published.</p>
+        </div>
+      <% end %>
+    
+    	<%= yield %>
+		  
+		  
+	  	<div class="clear">&nbsp;</div>
+		  
+		  <% unless @story %>
+        <% if params[:action] !="slideshow"%>
+		      <div class="action" style="margin-top: 20px;">
+      		  <%= link_to "Close", root_path, :id => "btnExitStory", :class => "image" %>
+  		    </div>
+        <%end%>
+		  <% end %>
+		  
+	  </div>
+	  
+	  <div class="clear">&nbsp;</div>
+	  
+  	<div style="text-align:right;">
+  	  <% if params[:action] != "slideshow" %>
+        <div id="google_translate_element"></div><script>
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en'
+          }, 'google_translate_element');
+        }
+        </script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      <%end%>
+    </div>
+  </div>
+    
+	</div>
+	
+	<%= flash_notice %>
+  <% if params[:controller] == "stories" && (params[:action] == "show" || params[:action] == "slideshow") %>
+    <div id="manual_flashBox" style="display:none" %>"><div id="flashOverlay">&nbsp;</div><div id="flash" class="notice"><%=simple_format "Sorry, you must be logged in to use this feature."%><span></br><a href="<%=current_path%>" onclick="document.getElementById('manual_flashBox').style.display = 'none'; return false;" class="button">close</a></span><span style ='margin-left:20px;'><a href="<%=account_path%>" onclick="document.getElementById('manual_flashBox').style.display = 'none'; window.opener.location='/account';window.close(); return true;" class="button">Sign Up</a></span></div></div>
+  <%else%>
+    <div id="manual_flashBox" style="display:none" %>"><div id="flashOverlay">&nbsp;</div><div id="flash" class="notice"><%=simple_format "Sorry, you must be logged in to use this feature."%><p></br><a href="<%=current_path%>" onclick="document.getElementById('manual_flashBox').style.display = 'none'; return false;" class="button">close</a></p></div></div>
+  <%end%>
+  <div id="chk_loggen_in" class="<%= logged_in? ? 'cls_logged_in' : 'cls_not_logged_in'%>" ></div>
+  <script type="text/javascript">
+  //<![CDATA[
+  
+  	// $$('a#btnX, a#logo', 'a#btnExitStory').each(function(el,idx) {
+   //    el.addEvent('click', function(evt) {
+   //      evt = new Event(evt).stop();
+   //     	if (window.opener) {
+   //     	  window.close();
+   //     	  return false;
+   //     	} else {
+   //     	  window.location.href = el.get('href') || '/';
+   //     	}
+   //    }.bind(this));
+   //  });
+   
+    jQuery('a#btnX, a#logo, a#btnExitStory').click(function() {
+      if (window.opener) {
+        window.close();
+        return false;
+      }
+      else
+      {
+        window.location.href = this.attr('href') || '/'
+      }
+    }); 
+  //]]>
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+
+<div id="footer">  
+	<div class="content">
+
+    <h5>&copy; copyright <%= Time.now.year %> - One Story Road</h5>
+    
+    <ul class="nav">
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Privacy Policy", "/privacy", :class => 'popup' %></li>
+      <li><%= link_to "Terms &amp; Conditions", "/terms", :class => 'popup' %></li>
+      <li><%= link_to "Site Map", "/sitemap" %></li>
+      <li><%= link_to "Report", "/report" %></li>
+    </ul>
+    
+	</div>
+	
+	<br/>
+	
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20886022-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>

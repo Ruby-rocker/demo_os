@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+	<%= render :partial => 'layouts/metatags' %>
+	
+ 	<title>One Story Road</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  
+  <%= stylesheet_link_tag 'pages/story/styles', :media => 'all' %>
+  <%= stylesheet_link_tag 'pages/story/print', :media => 'print' %>
+  
+  <%#= javascript_include_tag ['mootools','mootils','onestory','libs/validator'] %>
+		
+</head>
+
+<body>
+
+	<div id="container">
+		
+		<div id="header">
+    	<%= link_to "close", root_path, :id => 'btnX', :class => 'image' %>
+    	<%= link_to "One Story Road", root_path, :id => 'logo' %>
+		</div>
+		<div id="content">
+      
+    	<%= yield %>
+		  
+	    <div class="action" style="margin-top: 20px;">
+        <%= link_to "Close", root_path, :id => "btnExitStory", :class => "image" %>
+    	</div>
+
+	  	<div class="clear">&nbsp;</div>
+		  
+	  </div>
+	    	
+	  <div class="clear">&nbsp;</div>
+	  
+	</div>
+	
+	<%= flash_notice %>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  
+  	// $$('a#btnX, a#logo, a#btnExitStory').each(function(el,idx) {
+   //    el.addEvent('click', function(evt) {
+   //      evt = new Event(evt).stop();
+   //     	  window.close();
+   //     	  return false;
+   //    }.bind(this));
+   //  });
+   
+    jQuery('a#btnX, a#logo, a#btnExitStory').click(function() {
+      window.close();
+      return false;
+    });
+     
+  //]]>
+  </script>
+
+</body>
+</html>

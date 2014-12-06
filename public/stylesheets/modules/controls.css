@@ -1,0 +1,32 @@
+div#userControls {
+	right: 265px;
+	}
+
+div.controls {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: auto;
+	padding: 13px 7px 16px 7px;
+	background-color: #ddd;
+	-webkit-border-bottom-right-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	z-index: 500;
+	}
+div.controls a {
+	margin: 0 2px 0 2px;
+	padding: 7px 12px 7px 12px;
+	background-color: #eee;
+	color: #777;
+	text-decoration: none;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	}
+div.controls a:hover {
+	background-color: #fff;
+	}

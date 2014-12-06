@@ -1,0 +1,65 @@
+<h1>Plotting Users</h1>
+
+<div id="map" style="width: 100%; height: 400px; border: 1px solid #777;"></div>
+
+<br/>
+
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Login</th>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Activated?</th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= link_to user.login, user.link_path %></td>
+    <td><%=h user.first_role %></td>
+    <td><%=h user.name %></td>
+    <td><%=h user.email %></td>
+    <td><%=h user.active? %></td>
+  </tr>
+<% end -%>
+</table>
+
+
+<script type="text/javascript">
+//<![CDATA[
+ 	
+ 	var users = [{
+    "zoom": [0, 16],
+    "places": []
+  }];
+ 	
+	<% @users.each do |user| %>
+		users[0]["places"].push({ "name": "<%= user.login %>", "posn": [ <%= user.geocode.latitude %>, <%= user.geocode.longitude %> ]});
+	<% end -%>
+	
+  function load() {
+    if (GBrowserIsCompatible()) {
+    	
+    	OneStory.Maps.set(setupMap());
+    	OneStory.Markers.addMarkers(users);
+    	
+    }
+  }
+  
+  function setupMap() {
+    var map = new google.maps.Map2(document.getElementById('map'), { mapTypes: [ G_PHYSICAL_MAP, G_NORMAL_MAP, G_SATELLITE_MAP ], backgroundColor: '#ffffff' });
+    map.setCenter(new google.maps.LatLng(23, 0), 2);
+    // map.addControl(new GLargeMapControl(), new GControlPosition(G_ANCHOR_TOP_RIGHT, new GSize(16, 36)));
+    // map.addControl(new GMenuMapTypeControl(), new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(26, 36)));    
+    // map.enableDoubleClickZoom();
+    return map;
+  }
+  
+  window.addEvent('load', load);
+  window.addEvent('unload', GUnload);
+  
+
+//]]>
+</script>

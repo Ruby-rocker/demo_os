@@ -1,0 +1,24 @@
+<div id="createAccount">
+    
+	<h1 class="image">Create New Account</h1>
+  
+  <%= render :partial => 'users/new_user_form' %>
+      
+</div>
+    
+<div id="signIn">
+    
+	<h1 class="image">Account Sign In</h1>
+
+  <%= render :partial => 'sessions/form' %>
+  
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+	var uv = new Mootils.FormValidator('new_user');
+	var lv = new Mootils.FormValidator('login');
+   
+//]]>
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+	<%= render :partial => 'layouts/metatags' %>
+	
+	<title>One Story Road - Admin</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+
+  <%= stylesheet_link_tag 'admin', :media => 'all' %>
+  <%= stylesheet_link_tag @stylesheet, :media => 'all' if @stylesheet %>
+
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=<%= api_key %>"></script>
+	<%= javascript_include_tag ["markermanager"] if @map_javascript %>
+
+	<%= javascript_include_tag ['mootools','mootils','onestory'] %>
+  <%= javascript_include_tag @javascript if @javascript %>
+		
+</head>
+
+<body>
+
+	<div id="container">
+	  
+		<%= render :partial => 'users/user_bar' %>
+		<%= render :partial => 'layouts/admin/header' %>
+	  <%= render :partial => 'layouts/top_bar' %>
+	  
+	  <div id="content">
+	  	<%= yield %>
+		  
+		  <div class="clear">&nbsp;</div>
+	  	
+	  </div>
+	  
+	  <div class="clear">&nbsp;</div>
+	  
+	</div>
+	
+	<%= render :partial => 'layouts/footer' %>
+
+	<%= flash_notice %>
+
+</body>
+</html>

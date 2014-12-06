@@ -1,0 +1,42 @@
+<%= image_title "admin/titles/all_stories.gif", "All Stories" %>
+
+<%= render 'admin/stories/list' %>
+
+<br/>
+
+<%= image_title "admin/titles/plotting_stories.gif", "Plotting Stories" %>
+
+<div id="map" style="width: 680px; height: 400px; margin: 0 0 60px 40px; border: 1px solid #777;"></div>
+
+<script type="text/javascript">
+//<![CDATA[
+ 	
+ 	var stories = [];
+ 	
+	<% @stories.each do |story| %>
+		<%= "stories.push({ geocode: { id: #{story.id}, title: \"#{h story.title}\", latitude: #{story.geocode.latitude}, longitude: #{story.geocode.longitude} } });" if story.geocode && story.geocode.latitude && story.geocode.longitude %>
+	<% end -%>
+	
+  function load() {
+    if (GBrowserIsCompatible()) {
+    	OneStory.Maps.set(setupMap());
+    	//OneStory.Markers.addMarkers(stories, { callback: OneStory.Markers.showInfo });
+      OneStory.Locations.getLocations({ limit: 1000, showRecent: true, callback: OneStory.Markers.showInfo }, 40);
+    }
+  }
+  
+  function setupMap() {
+    var map = new google.maps.Map2(document.getElementById('map'), { mapTypes: [ G_PHYSICAL_MAP, G_NORMAL_MAP, G_SATELLITE_MAP ], backgroundColor: '#ffffff' });
+    map.setCenter(new google.maps.LatLng(23, 0), 2);
+    // map.addControl(new GLargeMapControl(), new GControlPosition(G_ANCHOR_TOP_RIGHT, new GSize(16, 36)));
+    // map.addControl(new GMenuMapTypeControl(), new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(26, 36)));    
+    // map.enableDoubleClickZoom();
+    return map;
+  }
+  
+  window.addEvent('load', load);
+  window.addEvent('unload', GUnload);
+  
+
+//]]>
+</script>

@@ -1,0 +1,15 @@
+default: &default
+  bucket: one-story-0fSDKFJeojg09j
+  access_key_id: AKIAJD5HN5A4SMTPR53A
+  secret_access_key: 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
+
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  bucket: one-story-test-0fSDKFJeojg09j
+
+production:
+  <<: *default

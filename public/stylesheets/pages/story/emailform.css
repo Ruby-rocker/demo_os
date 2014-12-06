@@ -1,0 +1,52 @@
+div#emailFriend {
+  position: absolute;
+  left: 193px;
+  top: 37px;
+  width: 265px;
+  padding: 20px;
+  background-color: #73928f;
+  border: 3px solid #6f6256;
+  z-index: 100;
+  display: none;
+  }
+div#emailFriend form {
+  margin: 0;
+  padding: 0;
+  }
+div#emailFriend form fieldset {
+  padding-bottom: 40px;
+  }
+div#emailFriend form ul li label {
+  text-align: left;
+  color: #fff;
+  }
+div#emailFriend form input[type="text"],
+div#emailFriend form textarea {
+  clear: both;
+  width: 90%;
+  background-color: #fff;
+  color: #3a2b1b;
+  }
+div#emailFriend form textarea {
+  padding: 5px;
+  }
+input#btnSend,
+a#btnCancel {
+  display: block;
+  position: absolute;
+  left: auto;
+  bottom: 0;
+  width: 69px;
+  height: 19px;
+  cursor: pointer;
+  }
+input#btnSend {
+  right: 17px;
+  background-image: url(/images/btn_send.gif);
+  }
+a#btnCancel {
+  right: 97px;
+  padding: 0;
+  background-image: url(/images/btn_cancel.gif);
+  }
+  

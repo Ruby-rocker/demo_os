@@ -1,0 +1,41 @@
+<% options = options || {} %>
+
+<ul class="archive">
+	
+	<% if @stories.empty? %>
+		
+		<li class="title">There are no stories..</li>
+		
+	<% else -%>
+
+		<% @stories.group_by(&:month).each do |month, items| %>
+			
+			<li class="title"><%= month %></li>
+
+		  <% items.each do |story| %>
+		  <li>
+		    <ul class="items">  <h1> Gagan Gami </h1>
+		      <li><%= story.created_at.strftime('%B %d, %Y').gsub(/(\s0)/, ' ') %></li>
+		      <li class="title"><%= link_to story.title, story.link_path, :class => 'story' %></li>
+		      
+		      <%= "<li>#{ story.location.nil? || story.location.empty? ? "unknown" : story.location }</li>" if options[:location] %>
+		      <%= "<li>#{ count_string(story.view_count, 'views') }</li>" if options[:view_count] %>
+		      		      
+		      <% if authorized? %>
+			      <li>
+			      	<%= link_to 'view', story.link_path, :class => 'story' %> /
+			      	<%= link_to 'edit', edit_story_path(story.user, story) %> /
+				      <%= link_to 'delete', delete_story_path(story.user, story), :confirm => 'Are you sure you want to delete this story?', :method => :delete %>
+				    </li>
+		  	    <li class="status">
+		  	    	<%= story.published ? "published" : "draft" %>	    	
+      		    <br class="clear" />
+		  	    </li>
+		      <% end -%>  
+		    </ul>
+		  </li>
+		  <% end -%>
+		<% end -%>
+	<% end -%>
+
+</ul>

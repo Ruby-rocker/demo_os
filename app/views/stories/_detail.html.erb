@@ -1,0 +1,40 @@
+<% if story %>
+	<ul class="stats">
+	  <% if story.featured_at %>
+	  <li><span>Featured On</span> - <%= story.featured_at.strftime('%B %d, %Y') %></li>
+	  <% end %>
+
+      <li><span>Views</span> <%= story.view_count %></li>
+
+    <% unless story.bookmarks.empty? %>
+	  <li><span>Bookmarks</span> - <%= story.bookmark_count %></li>
+	  <% end %>
+	  
+	  <!-- <li><span>Type</span> - <%= search_link 'type', story.fiction? ? "Fiction" : "Non-Fiction" %></li> -->
+	  <li>
+	  	<span>Likes</span> - <%= story.likes.count %>
+	  	<%# if current_user && params[:controller] == "stories" && params[:action] == "show" %>
+				<%# if current_user.likes.find_by_story_id(story.id) %>
+						<%#= link_to (image_tag "like_enabled.png"), story_like_path(story.id), :id => "btnLike", :style => "margin-top: 5px !important" %>
+				<%# else	%>
+						<%#= link_to (image_tag "like_disabled.png"), story_like_path(story.id), :id => "btnLike", :style => "margin-top: 5px !important"%>
+				<%# end %>
+			<%# end %>
+	  </li>
+	  
+	  <li><span>Author</span> - <%= search_link 'author', story.author, story.author %></li>
+
+	  <% unless !story.location || story.location.empty? %>
+	  <li><span>Story Location</span> - <%= search_link 'location', story.location %></li>
+	  <% end %>
+	  
+	  <% unless story.author_location.empty? %>
+	  <li><span>Author Location</span> - <%= search_link 'location', story.author_location %></li>
+	  <% end %>
+	  
+	  <li><span>Story submitted on</span> - <%= search_link 'date', story.created_at.strftime('%B %d, %Y'), story.created_at.strftime('%Y-%m-%d') if story.created_at %></li>
+
+	  <li style="margin-top: 18px;"><span>Keywords / Related Topics</span> - <%= tag_link_list(story.tag_list) rescue nil %></li>
+
+	</ul>
+<% end -%>

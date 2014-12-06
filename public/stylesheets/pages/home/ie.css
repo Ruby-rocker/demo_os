@@ -1,0 +1,21 @@
+div#map {
+  background-color : #aab699;
+  }
+div#mapButtons a {
+	background-image: url(/images/pages/home/map_keyword.gif);
+  }
+div#mapTop form fieldset button {
+	background-image: url(/images/pages/home/btn_go.gif);
+  }
+div#keywordSearch form fieldset button {
+	background-image: url(../images/pages/home/btn_search.gif);
+  }
+div#mapLegend {
+  background: transparent url(/images/pages/home/bg_legend.gif) 0 0 no-repeat;
+  }
+div#mapLegend div.end {
+  background: transparent url(/images/pages/home/bg_recent_end.gif) 0 0 no-repeat;
+  }
+a#btnShareStory {
+	background-image: url(/images/pages/home/btn_share.gif);
+  }

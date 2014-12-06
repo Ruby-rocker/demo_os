@@ -1,0 +1,13 @@
+<div id="header">
+	<h1>One Story Road</h1>
+</div>
+<div id="intro">
+	<%= render :partial => 'layouts/nav' %>	  
+  <a href="/" id="logo"><img src="/images/onestorylogo6.jpg" width="1" height="1">One Story Road</img></a>
+  <h1 class="image">Welcome</h1>
+  
+  <p class="main_desc">The heart of this site is the stories written and told by the people whose lives create them. It is aimed at finding and connecting one story with many stories, or any story, exploring the results in a growing engine. Fueled by what inspires you, you drive the beat. Bottom line is... share your story.</p>
+  
+  <%= link_to "Feature Story<span>#{Time.now.strftime('%B %d, %Y')}</span>", @feature_story.link_path, :id => "btnFeature", :class => "image story" if @feature_story %>
+  
+</div>

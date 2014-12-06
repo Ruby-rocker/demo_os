@@ -1,0 +1,44 @@
+<%= image_title "admin/titles/feature_stories.gif", "Featured Stories" %>
+
+<div class="tip">
+  <p>The most recently featured story will be the one shown on the homepage.<br/>These stories are sorted in order of date featured.</p>
+</div>
+
+<% options = options || {} %>
+
+<ul class="archive">
+	
+	<% if @stories.empty? %>
+		
+		<h3>There are no stories..</h3>
+		
+	<% else -%>
+
+    <li></li>
+
+		<% @stories.group_by(&:feature_month).each do |month, items| %>
+			
+			<li class="title"><%= month %></li>
+
+		  <% items.each do |story| %>
+		  <li>
+		    <ul class="items">  
+		      <li><%= story.featured_at.strftime('%B %d, %Y').gsub(/(\s0)/, ' ') %></li>
+		      <li class="title"><%= link_to story.title, story.link_path, :class => 'story' %></li>
+		      
+		      <%= "<li>#{ story.location.nil? || story.location.empty? ? "unknown" : story.location }</li>" if options[:location] %>
+		      <%= "<li>#{ count_string(story.view_count, 'views') }</li>" if options[:view_count] %>
+		      		      
+		      <% if authorized? %>
+			      <li>
+			      	<%= link_to 'view', story_path(story.user, story), :class => 'story' %> /
+				      <%= link_to 'un-feature', unfeature_admin_story_path(story.id), :confirm => 'Are you sure you want to un-feature this story?' %>
+				    </li>
+		      <% end -%>  
+		    </ul>
+		  </li>
+		  <% end -%>
+		<% end -%>
+	<% end -%>
+
+</ul>

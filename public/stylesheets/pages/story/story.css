@@ -1,0 +1,163 @@
+body {
+  min-width: 800px;
+  }
+div#container {
+  width: 764px;
+  }
+div#header {
+  position: relative;
+  width: 764px;
+  height: 187px;
+  }
+a#logo {
+  position: absolute;
+  left: 129px;
+  bottom: 0;
+  }
+div#content {
+  left: 129px;
+  width: 545px;
+  margin: 30px 0 0 0;
+  padding: 0 0 150px 0;
+  }
+
+div#content h1 {
+  font: normal 24px Georgia;
+  color: #3a2b1b;
+  word-wrap: break-word;
+  }
+div#content h2 {
+  font: normal 16px Georgia;
+  color: #564638;
+  }
+div#content h3 {
+  margin: 30px 0 20px 0;
+  font: normal 16px Verdana;
+  color: #686e69;
+  }
+div#content h4 {
+  font: bold 12px Verdana;
+  color: #626262;
+  margin: 0;
+  }
+div#content h5 {
+  font: italic 11px Verdana;
+  color: #888;
+  margin: 3px 0 0 0;
+  word-wrap: break-word;
+  }
+
+
+div.notice {
+  margin-bottom: 40px;
+  padding: 2px;
+  font-size: 18px;
+  background-color: #e7e7e7;
+  -webkit-border-radius: 11px;
+  -moz-border-radius: 11px;
+  border-radius: 11px;
+  }
+div.notice p {
+  margin: 10px;
+  }
+
+
+div.share {
+  position: relative;
+  width: 525px;
+  margin: 40px 0 20px 0;
+  padding: 0 0 50px 0;
+  border-bottom: 1px dashed #999;
+}
+
+div.share a {
+  display: block;
+  float: left;
+  height: 12px;
+  margin: 0 5px 0 0;
+  padding: 8px 0 8px 0;
+  font-size: 12px;
+  }
+div.share a:hover {
+  
+  }
+a#btnBookmark {
+  text-indent: 32px;
+  background-image: url(/images/pages/story/btn_bookmark.gif);
+  width:165px;
+  }
+a#btnEmail {
+  text-indent: 34px;
+  background-image: url(/images/pages/story/btn_email.gif);
+  width:150px;
+  }
+a#btnBuzz {
+  text-indent: 39px;
+  background-image: url(/images/pages/story/btn_buzz.gif);
+  width:195px;
+  }
+
+
+ul.stats {
+  margin: 18px 0 40px 0;
+  padding: 0;
+  color: #626262;
+  list-style-type: none;
+  }
+
+ul.stats li {
+  margin: 0 0 4px 0;
+  }
+  
+ul.stats li span {
+  color: #336666;
+  }
+  
+  
+a#btnX {
+  position: absolute;
+  right: 21px;
+  top: 14px;
+  width: 28px;
+  height: 28px;
+  background-image: url(/images/btn_x.png);
+  }
+  
+  
+div.action a {
+  display: block;
+  height: 12px;
+  padding: 4px 0 4px 0;
+  margin: 0;
+  text-indent: 24px;
+  }
+div.action a:hover {
+  background-position: 0 -20px;
+  }
+div.action a:active {
+  background-position: 0 -40px;
+  }
+a#btnReadMore {
+  background-image: url(/images/pages/story/btn_more.gif);
+  }
+  
+a#btnExitStory {
+  background-image: url(/images/pages/story/btn_exit.gif);
+  }
+.button_nt_pv {
+    background-color: #466815;
+    border: 1px solid #466815;
+    border-radius: 11px;
+    color: #BBBBBB;
+    font-size: 12px;
+    left: 33%;
+    margin: 20px 0 0;
+    padding: 5px 9px;
+    text-transform: uppercase;
+    width: 80px;
+} 
+.button_nt_pv:hover{
+  background-color: #4E7517;
+  color: #FFFFFF;
+  cursor: pointer;
+}  

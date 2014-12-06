@@ -1,0 +1,21 @@
+<div style="width: 450px;">
+  
+<% form_tag do %>
+<ul>
+	<li>
+	  <%= label_tag :email, 'Email*' %>
+	  <%= text_field_tag :email %><br/>
+	</li>
+	
+	<li>
+		<span class="legend">* required fields</span>
+	</li>
+	
+	<li class="buttons">
+		<%= submit_tag "send" %><br/>
+	</li>
+</ul>
+<% end -%>
+	
+	
+</div>

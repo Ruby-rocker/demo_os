@@ -1,0 +1,48 @@
+<h1 style = "padding-left:35px;">File Upload</h1>
+<% form_tag({:action => 'uploadFile'}, :multipart => true, :id => "new_upload", :class => "new_upload", :onsubmit => "return upload_validation()") do %>
+	<p style = "padding-left:35px;"><label for="upload_file">Select File</label>
+	<%= file_field 'upload', 'datafile' %></p>
+	<div id="divUploadCheckError" class="divError"></div>
+	<p style = "padding-left:35px;">
+		<%= submit_tag "Upload" %>
+	</p>
+<% end %>
+<br>
+<ul class="table five">
+  	<li class="headings">
+    	<ul>
+      		<li style = "width:580px;">Name</li>
+      		<li>Delete</li>
+    	</ul>
+    	<br class="clear" />
+  	</li>  
+  	<li class="data">
+
+		<% @all_banner.each_with_index do |a, index| %>
+			<ul class="item <%= list_color(index) %>">
+				<li style = "width:580px;"><%=a%></li>
+				<li><%= link_to "delete", cleanup_admin_uploads_path(:filename => a) %></li>
+			</ul>
+		<%end%>
+  	</li>
+</ul>
+<br>
+<script type="text/javascript">
+	function upload_validation(){
+		var upload_image = document.getElementById('upload_datafile').value;
+		var objErrDiv = document.getElementById('divUploadCheckError');
+		if(upload_image == ''){
+			objErrDiv.innerHTML= 'Please upload at least one Image';
+	        objErrDiv.style.padding='4px 4px';
+	        objErrDiv.style.visibility='visible';
+	        objErrDiv.style.color="#A80000";
+	        objErrDiv.style.margin='10px 0px 2px 35px';
+	        return false;
+		}
+		else
+	    {
+	        objErrDiv.innerHTML="";  // Try adding this
+	        return true;
+	    }
+	}
+</script>

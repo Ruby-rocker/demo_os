@@ -1,0 +1,13 @@
+@import url(/stylesheets/base.css);
+@import url(/stylesheets/copy.css);
+@import url(/stylesheets/form.css);
+@import url(./story.css);
+
+body, div#container {
+  background: #fff;
+  }
+
+
+#btnX, div.share {
+  display: none;
+  }

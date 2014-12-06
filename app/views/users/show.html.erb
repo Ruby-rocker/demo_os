@@ -1,0 +1,19 @@
+<%= render :partial => 'users/account_header' %>
+
+<%= link_to "Submit A New Story", new_story_path(current_user), :id => "btnSubmitLg", :class => "image" if authorized? %>
+    
+<div id="archive" class="userList">
+  <h2 class="image">Story Archive</h2>
+  <% if @stories %>
+    <%= will_paginate @stories %>
+    <%= render :partial => 'stories/archive', :locals => { :options => { :view_count => true }} %>
+  <% end %>
+</div>
+
+<div id="bookmarks" class="userList">   
+  <h2 class="image">Bookmarks</h2>
+  <% if @bookmarks %>
+    <%= will_paginate @bookmarks, :param_name => 'bpage' %>
+    <%= render :partial => 'bookmarks' %>
+  <% end %>
+</div>  

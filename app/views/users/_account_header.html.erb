@@ -1,0 +1,24 @@
+<% if authorized? %>
+
+	<div id="accountHeader">
+	  <div id="welcome">
+	  	<h1 class="image">Welcome to your admin</h1>
+	  	<p>- You are logged in as <span><%= link_to current_user.login, current_user.link_path %></span></p>
+	  </div>
+	  <div id="tools">
+	  	<h1 class="image">User Tools</h1>
+	  	<ul>
+	  		<li><%= link_to '> SUBMIT a new story', new_story_path(@user) %></li>
+	  		<li><%= link_to '> View my stories', @user.link_path %></li>
+        <li><%= link_to "> What's buzzing", buzzs_path %></li>
+        <li><%= link_to "> Edit my settings", edit_settings_path(@user) %></li>	  		
+	  		<li><%= link_to '> Edit my account', edit_user_path(@user) %></li>
+	  		<li><%#= link_to '> Edit my location', edit_user_path(@user) %></li>
+	  		<li><%= link_to '> Logout', logout_path %></li>
+				<li><%#= link_to 'Destroy', @user, :confirm => 'Are you sure?', :method => :delete  %></li>
+	    </ul>
+	  </div>
+		<br class="clr"/>
+	</div>
+	
+<% end -%>

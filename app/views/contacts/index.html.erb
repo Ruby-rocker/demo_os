@@ -1,0 +1,60 @@
+<%= image_title("pages/contact/contact_us.gif", "Contact Us") %>
+
+<div id="contact">
+
+  <p>Please contact us if you have questions or if you just want to say hi.</p>
+  </br>
+  <p>For an alternate way to post a story, send written or recorded stories to the address below.</p>
+  </br>
+  <p style="margin-top: 0;"><b>OneStoryRoad<br/>
+  P.O. Box 298<br/>
+  Santa Barbara, CA 93102</b></p>
+  
+  <br/>
+  
+  <div style="width: 410px;">
+  	<% form_for @contact do |f| %>
+  	<ul id="contactFormFields">
+  		<li>
+  			<%= f.label :name %><br/>
+  			<%= f.text_field :name, :class => 'required' %><br/>
+  		</li>
+  		<li>
+  			<%= f.label :email %><br/>
+  			<%= f.text_field :email, :class => 'required' %><br/>
+  		</li>
+  		<li>
+  			<%= f.label :message %><br/>
+  			<%= f.text_area :message, :rows=> 6, :class => 'required' %><br/>
+  		</li>
+      <li id="contact">
+        <p>Or connect through social media</p>
+      </li>
+      <li class="icon_parent" style ="margin-left:0px;width:45%;">
+        <p class="icon3"><a href="https://twitter.com/OneStoryRoad" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true" target="_blank"><img src="/images/tw.png"></a></p>
+        <p class="icon3"><a href="https://www.facebook.com/insights/#!/pages/OneStoryRoad/376938805709845" target="_blank"><img src="/images/fb.png"></a></p>
+        <p class="icon3"><a href="http://pinterest.com/onestoryroad/" data-pin-do="buttonPin" data-pin-config="none" target="_blank"><img src="/images/p.png"></a></p>
+        <!-- <p class="icon3"><a href="http://www.linkedin.com/groups/One-Story-Road-4578125" data-pin-do="buttonPin" data-pin-config="none" target="_blank"><img src="images/in.png"></a></p> -->
+        <!-- <p class="icon3"><su:badge layout="4"></su:badge></p> -->
+        <p class="icon3"><a href="http://www.stumbleupon.com/stumbler/onestoryroad1" target="_blank"><img src="/images/icone.png"></a></p>
+        <p class="icon3"><a href="https://plus.google.com/u/0/b/100902934330237718690/100902934330237718690/posts/p/pub" target="_blank"><img src="/images/google.jpeg" style="width: 22px;border-radius: 4px;"></a></p>
+        <!-- <p class="icon3"><img src="images/blog.png"></p>
+        <p class="icon3"> <img src="images/mail.png"></p> -->
+        <p  class = "icon3">
+          <%= f.submit 'send', :style => "margin-top:-4px;margin-left: 220px;" %><br/>
+        </p>
+      </li>      
+  	</ul>
+  	<% end %>
+  	<br/>
+  </div>
+  
+</div>
+
+
+<script type="text/javascript">
+//<![CDATA[
+  new Mootils.FormValidator('new_contact');
+  new Mootils.AutoGrow('#contact_message');
+//]]>
+</script>

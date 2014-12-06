@@ -1,0 +1,22 @@
+ul.dataList {
+  list-style-type: none;
+  font-size: 12px;
+  }
+
+li.label,
+li.value {
+  width: auto;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  float: left;
+  }  
+li.label {
+  clear: both;
+  width: 85px;
+  margin-right: 20px;
+  text-align: right;
+  color: #73928f;
+  }
+li.value {
+  color: #2b779b;
+  } 

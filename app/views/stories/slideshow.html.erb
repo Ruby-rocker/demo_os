@@ -1,0 +1,254 @@
+
+<h1><%=h @story_slide.title %></h1>
+<%= "<h2>by: #{search_link 'author', @story_slide.author, @story_slide.user.login}</h2>" unless @story_slide.anonymous? %>
+<% if @story_slide.media.present? && @story_slide.player_location == false%>
+  <audio controls>
+    <source src="<%= @story_slide.media.url(:original)%>" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+<%end%>
+<%= sanitize @story_slide.body %>
+
+<%
+# if @story.paragraphs.empty? 
+# <h3>There are no paragraphs in this story..</h3>
+# else 
+#  @story.paragraphs.each do |paragraph|
+#    render :partial => 'paragraphs/paragraph', :locals => { :paragraphs => @story.paragraphs, :paragraph => paragraph } 
+# end 
+# end %>
+
+<h3>You've Just Read</h3>
+<% if @story_slide.media.present? && @story_slide.player_location == true %>
+  <audio controls>
+    <source src="<%= @story_slide.media.url(:original)%>" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <!-- <embed src='http://<%= request.host_with_port%>/others/player-viral.swf' height='23' width='230' bgcolor='0xffffff' allowscriptaccess='always' allowfullscreen='true' flashvars="file=<%= @story.media.url(:original)%>&viral.onpause='false'&viral.oncomplete='false'&viral.allowmenu='false'"/> -->
+<%end%>
+<br>
+<h4><%=h @story_slide.title %></h4>
+<br>
+<h5><%= link_to "#{SITE_URL}#{@story_slide.link_path}", @story_slide.link_path, :id => 'btnLink' %></h5>
+
+
+<div class="share">
+  
+  <% if params[:controller] == "stories" && params[:action] == "slideshow" %>
+    <% if current_user && current_user.likes.find_by_story_id(@story_slide.id) %>
+      <% str = "" 
+      str << "#{image_tag 'like_enabled.png', :style => 'float: left;margin-right: 5px;'}"
+      str << "<span style =' float: left;margin-top: 10px;margin-right: 34px;'>Unlike this story</span>" %>
+      <%= link_to str, "javascript:;", :onclick => "return story_like_unlike(#{@story_slide.id})", :id => "btnLike", :style => "padding-top: 0;" %>
+    <% else %>
+      <% str = "" 
+      str << "#{image_tag 'like_disabled.png', :style => 'float: left;margin-right: 5px;'}"
+      str << "<span style =' float: left;margin-top: 10px;margin-right: 48px'>Like this story</span>" %>
+      <%= link_to str, "javascript:;", :onclick => "return story_like_unlike(#{@story_slide.id})", :id => "btnLike", :style => "padding-top: 0;"%>
+    <% end %>
+  <% end %>
+
+  <% if @story_slide.user.buzz_me && @story_slide.user != current_user %>
+    <a href="" id="btnBuzz" class="image">Buzz <%= @story_slide.author%></a>  
+    <div id="buzzTheAuthor">
+      <%= render :partial => 'buzzs/form' if logged_in? %>
+    </div>
+  <% end %>
+  
+  <br/>     
+  <br/>
+  <br/>
+
+  <% if logged_in? && current_user.bookmarks.find(:first, :conditions => { :story_id => @story_slide.id }) %>
+    <%= link_to "Bookmarked!", "#", :id => "btnBookmark", :class => "image", :style => "background-position: 0 center;", :onclick => "return false;" %>
+  <% else %>
+    <%= link_to "Bookmark this story", bookmark_story_path(@story_slide.user.login, @story_slide), :id => "btnBookmark", :class => "image", :method => :post %>
+  <% end %>
+  
+  <a href="" id="btnEmail" class="image">Send to a friend</a>
+  <div id="emailFriend">
+    <%= render :partial => 'referral/form' %>
+  </div> 
+   
+
+</div>
+  <%= render :partial => 'stories/detail', :locals => { :story => @story_slide } %>
+
+  <div class="action">
+    <%= link_to @story_slide.anonymous? ? "Read more anonymous stories" : "Read more stories by #{@story_slide.author}", "/search/author/#{@story_slide.author}", :id => "btnReadMore", :class => "image" %><br/>
+    <%= link_to "Exit Story", "javascript:;", :id => "btnExitStory", :class => "image" %>
+  </div>
+
+  <p class="icon3" style='float:left;margin-top:10px;'><a href="https://twitter.com/home?status='<%= @story_slide.title%>': '<%=request.host_with_port + '/' + @story_slide.user.login + '/' + @story_slide.path%>'" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true" target="_blank"><img src="/images/tw.png"></a></p>
+  
+  <p class="icon3" style='float:left;margin-left:5px;margin-top:10px;'><a href="<%=share_with_facebook_url({ :title => "#{@story_slide.title}",:images => {0 => "#{request.protocol}#{request.host_with_port}/images/onestorylogo6.jpg"},:summary => "Pragmatic Ruby on Rails development company", :description => "One Story Road",:url => "#{request.protocol}#{request.host_with_port}/slideshow/#{@story_slide.id}" })%>" target="_blank"><img src="/images/fb.png"></a></p>
+  
+  <p class="icon3" style='float:left;margin-top:10px;'><a href="https://plus.google.com/share?url='<%=request.host_with_port + '/' + @story_slide.user.login + '/' + @story_slide.path%>'&t='<%=@story_slide.title%>'" target="_blank"><img src="/images/google.jpeg" style="float: left;width: 22px;margin-left: 5px;border-radius: 5px;"></a></p>
+  <p class="icon3" style='float:left;margin-top:10px;margin-left:5px;'><a href="http://pinterest.com/onestoryroad/" data-pin-do="buttonPin" data-pin-config="none" target="_blank"><img src="/images/p.png"></a></p>
+  <p class="icon3" style='float:left;margin-top:10px;margin-left:5px;'><a href="http://www.stumbleupon.com/submit?url=<%=request.host_with_port%>" target="_blank"><img src="/images/icone.png"></a></p>
+<div style="margin-top:40px;margin-left:190px;margin-bottom:20px;">
+  <input type="button" value="Previous" id = "prev_btn" class="button_nt_pv" onClick="return backward()">
+  <input type="button" value="Next" id = "next_btn" class="button_nt_pv" onClick="return forward()">
+</div>
+<img src="/images/spinner.gif" id ="spinner_img" style="display:none;margin-top: -20px;margin-left: -20px;height: auto;width: auto;top: 50%;left: 50%;position: fixed;">
+ <script type="text/javascript">
+  //<![CDATA[
+
+    jQuery(document).ready(function(){
+      jQuery('#btnEmail, #btnCancel').click(function(){
+        jQuery('#emailFriend').toggle()
+        return false
+      });
+
+      jQuery('#btnBuzz, #btnCancelBuzz').click(function(){
+        if(jQuery('#chk_loggen_in').hasClass("cls_not_logged_in"))
+        {
+          jQuery('#manual_flashBox').show()
+        }
+        else
+        {
+          jQuery('#buzzTheAuthor').toggle()
+        }
+        return false;
+      }); 
+    })
+    // new Mootils.FormValidator('new_referral');
+
+    // $$('a#btnEmail', 'button#btnCancel').each(function(el,idx) {
+    //   el.addEvent('click', function(evt) {
+    //     evt = new Event(evt).stop();
+    //     toggleForm();
+    //   }.bind(this));
+    // });
+
+       
+
+    // $$('a').each(function(el,idx) {
+   //    var id = el.get('id');
+   //    if (id && id.test(/btnLink|btnX|logo|btnBookmark|btnEmail|btnLike|btnBuzz|btnCancel|btnSendBuzz|btnCancelBuzz/)) return false;
+   //    el.addEvent('click', function(evt) {
+   //      evt = new Event(evt).stop();
+   //       if (window.opener) {
+   //         if (id && id.test(/btnExitStory/)) {      
+   //          window.close();
+   //         } else {
+   //           var href = el.get('href');
+   //          var a = "hello"
+   //          window.opener.location.href = href + a;
+   //          window.close();
+   //        }        
+   //       } else {
+   //        if (!el.get('href')) window.location.href = '/';
+   //       }
+   //    }.bind(this));
+   //  });
+
+    function toggleForm() {  
+      jQuery('#emailFriend').toggle()
+     }
+
+
+    
+
+    function toggleBuzzForm() {  
+      jQuery('#buzzTheAuthor').hide()
+    }
+    function backward(){
+      jQuery("#spinner_img").fadeIn({duration:100});
+      jQuery(".story_inner").css("opacity", "0.8")
+      var all_story = new Array(<%= @find_story.map(&:to_s).join(",")%>)
+      var found_story = (all_story.indexOf(<%= @story_slide.id %>) > -1)
+      var final_check_story = all_story.indexOf(<%= @story_slide.id%>)
+      var decrement_story = final_check_story - 1
+      if(found_story == true)
+      {
+        if(all_story[decrement_story] == undefined)
+        {
+          jQuery(".story_inner").css("opacity", "1");
+          jQuery("#prev_btn").css("display", "none");
+          jQuery("#spinner_img").fadeOut({duration:100});
+          return false;
+        }
+        else
+        {
+          jQuery("#prev_btn").css("display", "block");
+          jQuery.ajax({
+            url: "/slideshow?id="+all_story[decrement_story]
+          }).success(function(data){
+            jQuery("#spinner_img").fadeOut({duration:100});
+            jQuery(window).scrollTop(0);
+            jQuery('.story_inner').html("");
+            jQuery('.story_inner').html(data);
+            jQuery("div#header").css("background-image","none");
+            jQuery("div#header").css("background","none");
+            jQuery(".story_inner").css("opacity", "1")
+          });
+        }
+      }
+    }
+
+    if(<%= @find_story.length%> == 1){
+    jQuery("#next_btn").css("display", "none");
+    jQuery("#prev_btn").css("display", "none");
+    }
+    if(<%= @story_slide.id %> == <%= @find_story[0]%>)
+    {
+      jQuery("#prev_btn").css("display", "none");
+    }
+    if(<%= @story_slide.id %> == <%= @find_story.last%>)
+    {
+      jQuery("#next_btn").css("display", "none");  
+    }
+    function forward(){
+      jQuery("#spinner_img").fadeIn({duration:100});
+      jQuery(".story_inner").css("opacity", "0.8")
+      var all_story = new Array(<%= @find_story.map(&:to_s).join(",")%>)
+      var found_story = (all_story.indexOf(<%= @story_slide.id %>) > -1)
+      var final_check_story = all_story.indexOf(<%= @story_slide.id%>)
+      var increment_story = final_check_story + 1
+      if(found_story == true)
+      {
+        if(all_story[increment_story] == undefined)
+        {
+          jQuery(".story_inner").css("opacity", "1")
+          jQuery("#next_btn").css("display", "none");
+          jQuery("#spinner_img").fadeOut({duration:100});
+          
+          return false;
+        }
+        else
+        {
+          jQuery("#next_btn").css("display", "block");
+          jQuery.ajax({
+            url: "/slideshow?id="+all_story[increment_story]
+          }).success(function(data){
+            jQuery("#spinner_img").fadeOut({duration:100});
+            jQuery(window).scrollTop(0);
+            jQuery('.story_inner').html("");
+            jQuery('.story_inner').html(data);
+            jQuery("div#header").css("background-image","none");
+            jQuery("div#header").css("background","none");
+            jQuery(".story_inner").css("opacity", "1")
+            
+          });
+        }
+      }
+    }
+
+    jQuery("a#btnExitStory").click(function() {
+      jQuery("#story_replace").css("display", "none");
+      jQuery(".main_contant").css("display", "block");
+      jQuery("#footer").css("display", "block");
+      jQuery("#story_replace").html("");
+    });
+    function story_like_unlike(id){
+      
+      jQuery.ajax({
+        url: "story_like?id="+id
+      }).success(function(response){
+        jQuery(".story_inner").html("");
+        jQuery(".story_inner").html(response);
+      })
+    }
+  //]]>
+  </script>

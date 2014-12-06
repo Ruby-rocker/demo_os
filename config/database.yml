@@ -1,0 +1,17 @@
+default: &default
+  adapter: mysql
+  host: localhost
+  username: root
+  password: password
+  database: one_story_live
+  encoding: utf8
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  database: one_story_live
+
+production:
+  <<: *default

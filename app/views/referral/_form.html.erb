@@ -1,0 +1,30 @@
+<% form_for(@referral) do |f| %>
+  <ul>
+    <li>
+    	<%= f.label :name %><br/>
+    	<%= f.text_field :name, :class => 'required' %><br/>
+    </li>
+    <li>
+    	<%= f.label :email %><br/>
+    	<%= f.text_field :email, :class => 'required' %><br/>
+    </li>
+    <li>
+    	<%= f.label :friend_email, "Friend's Email" %><br/>
+    	<%= f.text_field :friend_email, :class => 'required' %><br/>
+    </li>
+    <li>
+    	<%= f.label :message %><br/>
+    	<%= f.text_area :message, :rows=> 5, :class => 'required' %><br/>
+    </li>
+    <li class="buttons">
+        <% if params[:controller] == "stories" && params[:action] == "slideshow" %>
+            <%= f.hidden_field :story_title, :value => @story_slide.title, :class => "hidden" %>
+        <%else%>
+            <%= f.hidden_field :story_title, :value => @story.title, :class => "hidden" %>
+        <%end%>
+      <%= f.hidden_field :referring_url, :value => current_path, :class => "hidden" %>
+    	<%= link_to_function "cancel", "", :id => 'btnCancel', :class => 'image' %>
+    	<%= f.submit 'send', :id => 'btnSend', :class => 'image' %>
+    </li>
+  </ul>
+<% end %>

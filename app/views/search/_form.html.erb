@@ -1,0 +1,38 @@
+<% form_tag(search_path, :id => "searchForm", :method => :get) do %>
+	<ul>
+		<li>
+			<%= label_tag "keywords" %>
+			<%= text_field_tag "keywords", "" %><br/>
+		</li>
+		<li>
+			<%= label_tag "subject" %>
+			<%= text_field_tag "subject", "" %><br/>
+		</li>
+		<li>
+			<%= label_tag "author" %>
+			<%= text_field_tag "author", ""  rescue nil %><br/>
+		</li>
+		<li>
+			<%= label_tag "location" %>
+			<%= text_field_tag "location", "" %><br/>
+		</li>
+		<li>
+			<%= label_tag "date" %>
+			<%= text_field_tag "date", "" %><br/>
+		</li>
+		<!-- <li class="radioLabel">
+   	  <span>&nbsp;</span>
+   	</li>   
+    <li class="radio">
+   	  <%= radio_button_tag :fiction, true, false, :class => "toggle" %>
+   	  <%= label_tag "fiction_true", "Fiction" %>
+   	</li> 
+    <li  class="radio">
+   	  <%= radio_button_tag :fiction, 0, 0, :class => "toggle" %>
+   	  <%= label_tag "fiction_false", "Non-Fiction" %>
+   	</li> -->
+		<li>
+			<%= submit_tag "Search", :id => "btn_search", :class => "button" %>
+		</li>
+	</ul>
+<% end -%>

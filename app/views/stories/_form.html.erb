@@ -1,0 +1,251 @@
+<%#= javascript_include_tag ['mootools','mootils','onestory','libs/validator', 'swfobject'] %>
+<div id="story">
+	<% form_for([@user, @story], :html => { :multipart => true }) do |f| %>
+		<fieldset class="title">
+			<ul>
+			  <li>
+			    <%= f.label :title %>
+			    <%= f.text_field :title %><br/>
+			  </li>
+			  <li>
+			  	<%= f.label :created_at, 'Date' %>
+					<span style="width: auto;"><%= Time.now.strftime('%B %d, %Y') %></span><br/>
+				</li>
+			  <li class="checkbox anonymous">
+			  	<%= f.check_box :anonymous %>
+			    <%= f.label :anonymous, 'post this story anonymously' %><br/>
+			  </li>
+			</ul>
+		</fieldset>
+		
+		<fieldset id="storyBody">
+			<ul>
+			 	<li class="header">
+			 	  <span>your story...</span>
+			 	</li>
+			</ul>
+			
+      <div class="field">
+        <%= use_tinymce -%>
+          
+        <%= f.text_area :body, :cols => 75, :rows => 10, :class => "mceEditor"%>
+      </div>	
+
+  		<%if mobile_device?%>		
+			<%end%>	  
+      <ul>
+        <li class = "header" style ="height: 80px;">
+          <div style ="width:240px;float:left;margin-left: 22px;margin-top: 20px;">
+            <span style = "width:230px;float:left;padding:0;">audio media upload...</span>
+            <span style = "width:230px;float:left;padding:0;font-size:10px;margin-left:2px;">(acc,mp3,mp4 format 10mb max)</span>
+          </div>
+          <div style = "width:320px;float:left;padding-top:5px;"><%= f.file_field :media, :style => "background-color:none;" %></div>
+          <div style ="width:450px;">
+            <div >
+              <div style="width:26px;margin-left:262px;"><%= f.check_box :player_location, :style => "width:26px;margin-top: 10px;"%></div>
+              <div style="float:left;margin-top: 9px;"><%= f.label :player_location, 'locate player at end', :style => "font-size:11px;float: none;margin-top: 6px;"%></div>
+            </div>
+            <!-- <label style = "font-size:11px;float: none;margin-top: 6px;">locate player at end</label> -->
+          </div>
+        </li>
+      </ul>
+		</fieldset>
+		
+    <!-- <fieldset>
+      <ul>
+        <li class = "upload_media">
+          <%= f.label :media %>
+          <%= f.file_field :media %>
+        </li>
+      </ul>
+    </fieldset> -->
+
+   	<fieldset>
+       	
+     	<ul>
+     		<li class="keywords">
+	     	  <%= f.label :tag_list, 'Keywords that describe your story' %>
+   		    <%= f.text_area :tag_list, :cols => 68, :rows => 3 %>
+        	<p>Examples - love, travelng, 1960's, Hawaii, surfing, punk rock, cowboys, kung fu, diary, 23 years old, London, wild fire, birthday, grandpa's war stories, creation, destruction, etc.</p>
+        </li>
+      </ul>
+		</fieldset>		
+		 	  
+		<fieldset class="optional">
+    	<legend>
+     	  <span>Story Info <i>(Required info)</i></span>
+     	</legend>
+			<ul>
+			
+       	<!-- <li class="radioLabel">
+       	  <span>&nbsp;</span>
+       	</li>
+
+				 <li  class="radio">
+       	  <%= f.radio_button :fiction, "true", :class => "toggle" %>
+       	  <%= f.label 'fiction_true', 'Fiction' %>
+       	</li> 
+
+				<li  class="radio">
+       	  <%= f.radio_button :fiction, 0, { :checked => true } %>
+       	  <%= f.label 'fiction_false', 'Non-Fiction' %>
+       	</li> -->
+
+			  <li>
+			    <%= f.label :year %>
+			    <%= f.text_field :year %><br/>
+			  </li>
+			  
+			  <li>
+			    <%= f.label :location %>
+			    <%= f.text_field :location, :value => @story.location %><br/>
+			  </li>
+
+        <li>
+          <%= f.label :state %>
+          <%= f.text_field :state, :value => @story.state %><br/>
+        </li>
+
+        <li>
+          <%= f.label :country %>
+          <%= f.text_field :country, :value => @story.country %><br/>
+        </li>
+
+			  <% unless current_user.location.empty? %>
+			  <li class="checkbox">
+			    <%= f.check_box :use_author_location %>
+			    <%= f.label :use_author_location, "Use my location." %><br/>
+			  </li>
+			  <% end %>
+			</ul>
+		</fieldset>
+		
+		<fieldset class="optional">       	
+     	<legend>
+     	  <span>Subject Info <i>(optional)</i></span>
+     	</legend>		
+			<ul>
+				<li>
+			    <%= f.label :subject %>
+			    <%= f.text_field :subject %><br/>
+			  </li>
+				<li>
+			    <%= f.label :age %>
+			    <%= f.text_field :age %><br/>
+			  </li>
+				<li>
+			    <%= f.label :gender %>
+			    <%= f.text_field :gender %><br/>
+			  </li>
+			</ul>
+		</fieldset>
+		
+  	<%= hidden_field_tag 'fieldset_count', 1, :class => "hidden" %>
+  	<%= f.hidden_field :published, :class => "hidden" %>
+  				  
+    <%= f.submit '> Save & Publish', :id => "btnPublish", :class => "btnImage" %><br class="clear" />
+    <%= f.submit '> Save as Draft', :id => "btnDraft", :class => "btnImage" %>
+  	<% end -%>
+    <div style="clear:both">
+      <%= button_to '> Cancel', current_user.link_path, :method => 'get', :id => "btnCancel", :class => "btnImage" %>
+	  </div>
+
+</div>
+<%if mobile_device?%>
+ <%= javascript_include_tag 'purespell/pureSpellCheck.js' %>
+ <iframe id="cylinder" style="display:none"></iframe>
+ <script type="text/javascript">
+   var SpellCheckerObj = new PureSpellChecker('story_body','english','/images/purespell/','/purespell/');
+   SpellCheckerObj.checkGrammar = true;
+   SpellCheckerObj.preloadDictionary(); 
+ </script>
+<%end%>
+
+<script type="text/javascript">
+//<![CDATA[
+  var ag = new Mootils.AutoGrow('li.paragraph textarea, #story_tag_list');
+  
+  function validKeyword()
+  {
+    var flag = 0;
+    var story_title_udr = document.getElementById("story_title").value.indexOf("_")
+    var story_title_spec = document.getElementById("story_title").value.indexOf(" ")
+    if(story_title_udr != "-1" || story_title_spec != "-1")
+    {
+      alert("Underscore and Space not allow. Please select another title")
+      return false;
+    }
+    else{
+      var story_tag = document.getElementById("story_tag_list").value.split(",")
+      for(var i=0; i< story_tag.length; i++)
+      {
+        if(story_tag[i].length > 25)
+        {
+          flag = 1;
+        }
+      }
+      if(flag == 1)
+      {
+        alert("Please enter maximum 25 characters per comma in keywords");
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+      //return true;
+    }
+    var story_tag = document.getElementById("story_tag_list").value.split(",")
+    for(var i=0; i< story_tag.length; i++)
+    {
+      if(story_tag[i].length > 25)
+      {
+        flag = 1;
+      }
+    }
+    if(flag == 1)
+    {
+      alert("Please enter maximum 25 characters per comma in keywords");
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+  
+  $('btnPublish').addEvent('click', function(evt) {
+  	$('story_published').set('value', 1);
+    return validKeyword();
+  });
+  $('btnDraft').addEvent('click', function(evt) {
+  	$('story_published').set('value', 0);
+    return validKeyword();
+  });
+
+  $('btnCancel').addEvent('click', function(evt) {
+  	window.location.href = '../../main';
+  });
+  
+  var afs = new Mootils.AutoFieldset('<%= @last_field_set %>', { template: 'fieldset_new_template', countField: 'fieldset_count' });
+  
+  
+  $$('a.replace').each(function(el,idx) {
+    el.addEvent('click', function(evt){
+      evt = new Event(evt).stop();
+      var rplr = $('replacer' + idx);
+      var slider = new Fx.Slide(rplr);
+      if (rplr.getStyle('display') === 'none') {
+        slider.hide();
+        rplr.setStyle('display', 'block');
+      }
+      slider.toggle();
+    }); 
+  });
+
+  
+  Mootils.autoPreview();  
+
+//]]>
+</script>
+

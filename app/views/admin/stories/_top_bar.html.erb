@@ -1,0 +1,6 @@
+<%= link_to_unless_current "All Stories", admin_stories_path, :id => "btnAllStories", :class => 'button' do |link|
+  "<span class=\"button active\">#{link}</span>"
+end %>
+<%= link_to_unless_current "Featured Stories", featured_admin_stories_path, :id => "btnFeaturedStories", :class => 'button' do |link|
+  "<span class=\"button active\">#{link}</span>"
+end %>

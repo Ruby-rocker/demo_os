@@ -1,0 +1,52 @@
+div#buzzTheAuthor {
+  position: absolute;
+  left: 193px;
+  top: 37px;
+  width: 265px;
+  padding: 20px;
+  background-color: #73928f;
+  border: 3px solid #6f6256;
+  z-index: 100;
+  display: none;
+  }
+div#buzzTheAuthor form {
+  margin: 0;
+  padding: 0;
+  }
+div#buzzTheAuthor form fieldset {
+  padding-bottom: 40px;
+  }
+div#buzzTheAuthor form ul li label {
+  text-align: left;
+  color: #fff;
+  }
+div#buzzTheAuthor form input[type="text"],
+div#buzzTheAuthor form textarea {
+  clear: both;
+  width: 90%;
+  background-color: #fff;
+  color: #3a2b1b;
+  }
+div#buzzTheAuthor form textarea {
+  padding: 5px;
+  }
+input#btnSendBuzz,
+a#btnCancelBuzz {
+  display: block;
+  position: absolute;
+  left: auto;
+  bottom: 0;
+  width: 69px;
+  height: 19px;
+  cursor: pointer;
+  }
+input#btnSendBuzz {
+  right: 17px;
+  background-image: url(/images/btn_send.gif);
+  }
+a#btnCancelBuzz {
+  right: 97px;
+  padding: 0;
+  background-image: url(/images/btn_cancel.gif);
+  }
+  

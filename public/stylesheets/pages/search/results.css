@@ -1,0 +1,136 @@
+ 
+div#content {
+  width: 930px;
+  min-height: 440px;
+  margin: 0 auto;
+  padding: 0 0 60px 0;
+  overflow: hidden;
+  }  
+  
+div#criteria {
+  width: 375px;
+  padding: 53px 0 20px 110px;
+  background: transparent url(/images/pages/search/loop.gif) 45px 41px no-repeat;
+  }
+div#criteria h2 {
+  margin: 0 0 10px 0;
+  padding: 0;
+  font: italic bold 14px Verdana;
+  color: #3f8f2a;
+  }
+div#criteria h3 {
+  margin: 0 0 10px 0;
+  padding: 0;
+  font: normal 14px Verdana;
+  }
+div#criteria h3 b {
+  font-style: italic;
+  }
+div#criteria h4 {
+  margin: 0 0 10px 0;
+  padding: 0;
+  font: normal 12px Verdana;
+  color: #2b779b;
+  }  
+div#criteria h4 b {
+  color: #564638;
+  }
+  
+  
+div#listView {
+  width: 490px;
+  padding: 0;
+  z-index: 40;
+  }
+div#map {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 440px;
+  height: 440px;
+  z-index: 100;
+  overflow: hidden;
+  }
+  
+div.pageInfo {
+  position: relative;
+  width: 330px;
+  margin: 0 0 0 110px;
+  }
+  
+ul#results {
+  list-style-type: none;
+  position: relative;
+  margin: 0 0 0 110px;
+  padding: 0;
+  }
+  
+ul li.result {
+  position: relative;
+  width: 330px;
+  padding: 20px 0 0 0;
+  border-top: 1px dashed #999; 
+  }
+ul li.result h1 {
+  margin: 0;
+  padding: 0;
+  font: bold 12px Verdana;
+  }
+ul li.result h1 a {
+  color: #333;
+  }
+ul li.result h2 {
+  margin: 0 0 8px 0;
+  padding: 0;
+  font: bold 24px Verdana;
+  }
+ul li.result h2 a {
+  color: #564638;
+  }
+  
+  
+  
+  
+  
+ul.stats {
+  list-style-type: none;
+  margin: 10px 0 20px 0;
+  padding: 0;
+  color: #626262;
+  }
+
+ul.stats li {
+  margin: 0 0 4px 0;
+  }
+  
+ul.stats li span {
+  color: #336666;
+  }
+  
+  
+div#locationList {
+  top: 20px;
+  right: 20px;
+  }  
+  
+  
+ul li.resultDetail {
+  display: none;
+  width: 275px;
+  }
+  
+ul li.resultDetail h1 {
+  margin: 0 0 10px 0;
+  padding: 0;
+  font: bold 12px Verdana;
+  }
+  
+ul li.resultDetail ul.stats {
+  margin: 0;
+  }
+  
+ul li.resultDetail li {
+  font-size: 10px;
+  margin: 0 0 2px 0;
+  }
+  

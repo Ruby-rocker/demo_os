@@ -1,0 +1,88 @@
+li.buzzitem.selected
+{
+	background-color:#eee;
+}
+
+ul.buzz_list {
+margin-left:0px;
+padding-left:0px;
+margin-top:10px;
+} 
+
+ul.buzz_list  li.buzz {
+  list-style:none;
+  padding:10px 0px;
+  border-bottom:solid 1px #eee;
+}
+
+ul.buzz_list li.buzz a.title {
+    color: #2B779B;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+ul.buzz_list li.buzz span.buzzdate {
+  font-style:italic;
+}
+
+ul.buzz_list li.buzz a.buzzlink {
+  float:right;
+}
+
+div.buzz_list span.buzz_title {
+  font-weight:bold;
+}
+div.buzz_list span.buzz_body {
+  padding-left:20px;
+}
+div.buzz {
+  margin-bottom:10px;
+  border-bottom:1px solid #ccc;
+}
+div#buzz_reply {
+  width:500px;
+  background-color: #73928f;
+  border: 3px solid #6f6256;
+  padding: 20px;
+}
+div#buzz_reply form {
+  margin: 0;
+  padding: 0;
+  }
+div#buzz_reply form fieldset {
+  padding-bottom: 40px;
+  }
+div#buzz_reply form ul li label {
+  text-align: left;
+  color: #fff;
+  }
+div#buzz_reply form input[type="text"],
+div#buzz_reply form textarea {
+  clear: both;
+  width: 90%;
+  background-color: #fff;
+  color: #3a2b1b;
+  }
+div#buzz_reply form textarea {
+  padding: 5px;
+  }
+input#btnSendBuzz,
+a#btnCancelBuzz {
+  display: block;
+  position: absolute;
+  left: auto;
+  bottom: 0;
+  width: 69px;
+  height: 19px;
+  cursor: pointer;
+  }
+input#btnSendBuzz {
+  right: 17px;
+  background-image: url(/images/btn_send.gif);
+  }
+a#btnCancelBuzz {
+  right: 97px;
+  padding: 0;
+  background-image: url(/images/btn_cancel.gif);
+  }

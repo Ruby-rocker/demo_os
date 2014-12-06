@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+	<%= render :partial => 'layouts/metatags' %>
+	
+	<title>One Story Road</title>
+  <meta name="description" content="The heart of this site is the stories written and told by the people whose lives create them. It is aimed at finding and connecting one story with many stories, or any story, exploring the results in a growing engine. Fueled by what inspires you, you drive the beat. Bottom line is... share your story." />
+  <meta name="keywords" content="" />
+  <meta content = "text/html; charset=utf-8", "http-equiv" = "Content-Type" />
+  <%= include_stylesheets :common, :media => 'all' %>
+  <%= stylesheet_link_tag @stylesheet, :media => 'all' if @stylesheet %>
+  <%= stylesheet_link_tag 'ie' if request.ie_lt7? %>
+
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=<%= api_key %>"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <%= include_javascripts :common %>
+  
+  <%= include_javascripts :maps if @map_javascript %>
+  <%= javascript_include_tag @javascript if @javascript %>
+  <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+  <script type="text/javascript">
+    (function() {
+      var li = document.createElement('script'); li.type = 'text/javascript'; li.async = true;
+      li.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + '//platform.stumbleupon.com/1/widgets.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(li, s);
+    })();
+  </script>
+</head>
+
+<body>
+
+	<div id="container">
+    
+		<%= render :partial => 'users/user_bar' unless current_path == root_path %>
+		<%= render :partial => 'layouts/header' unless current_path == root_path %>
+	  <%= render :partial => 'layouts/top_bar' unless current_path == root_path %>
+	  <%= render :partial => 'layouts/intro' if current_path == root_path %>
+	  
+	  <div id="content">
+	  	<%= yield %>
+		  
+		  <div class="clear">&nbsp;</div>
+	  	<% if params[:controller] == "static" %>
+        <div style="margin-top: -46px; margin-right: 15px; position: relative; text-align: right; width:100%;">
+      <% else %>
+        <div style="margin-top: 4px; margin-right: 42px; position: relative; text-align: right;width:100%;">
+      <% end %>
+        <% if params[:action] == "index" %>
+        <div class="icon_parent">
+          <p class="icon3"><a href="https://twitter.com/OneStoryRoad" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true" target="_blank"><img src="images/tw.png"></a></p>
+          <p class="icon3"><a href="https://www.facebook.com/insights/#!/pages/OneStoryRoad/376938805709845" target="_blank"><img src="images/fb.png"></a></p>
+          <p class="icon3"><a href="http://pinterest.com/onestoryroad/" data-pin-do="buttonPin" data-pin-config="none" target="_blank"><img src="images/p.png"></a></p>
+          <!-- <p class="icon3"><a href="http://www.linkedin.com/groups/One-Story-Road-4578125" data-pin-do="buttonPin" data-pin-config="none" target="_blank"><img src="images/in.png"></a></p> -->
+          <!-- <p class="icon3"><su:badge layout="4"></su:badge></p> -->
+          <p class="icon3"><a href="http://www.stumbleupon.com/submit?url=<%=request.host_with_port%>" target="_blank"><img src="images/icone.png"></a></p>
+          <!-- <p class="icon3"><img src="images/blog.png"></p>
+          <p class="icon3"> <img src="images/mail.png"></p> -->
+        </div>
+        <% end %>
+    	  <div id="google_translate_element"></div><script>
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en'
+          }, 'google_translate_element');
+        }
+        </script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      </div>
+	  </div>
+	  
+	  <div class="clear">&nbsp;</div>
+	  
+	</div>
+	
+	<%= render :partial => 'layouts/footer' %>
+
+	<%= flash_notice %>
+
+</body>
+</html>

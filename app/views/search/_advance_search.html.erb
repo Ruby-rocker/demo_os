@@ -1,0 +1,484 @@
+<% form_tag(advance_search_path, :id => "advancesearchForm", :method => :get) do %>
+  <div class='mid_top' style="background: #000">
+      <input type='hidden' name='hdn_atoz' value="">
+        <p class= 'atoz'>
+          <a onClick = "get_keyword_value('All')" value= 'All'>All</a>
+        <% ('A'..'Z').each do |key| %>
+          <a onClick = "get_keyword_value('<%= key %>')" value= '<%= key %>'><%= key %></a>
+        <% end %>
+        </p>
+    <p class='Keywordbg' id="white" style='color:#cccccc'> Keywords: 
+     <a class="select_all_keyword" id="white" style='color:#154200'>All Keywords</a>
+    </p>
+    
+    <p class='Genderbg' id="white" style='color:#cccccc' > Gender:
+      <span id="white" style='color:#154200'>All</span> 
+    </p>
+    <p class='agebg' id="white" style='color:#cccccc'> Ages:
+      <span id="white" style='color:#154200'>All</span> 
+    </p>
+    <p class='locationbg' id="white" style='color:#cccccc'> Location:
+     <span id="white" style='color:#154200'>All</span> 
+    </p>
+    <p class='Storiesbg' id="white" style='color:#cccccc'> Stories:
+     <span id="white" style='color:#154200'>All</span> 
+    </p>
+    <p class='datebg' id="white" style='color:#cccccc'> Dates:
+      <span id="white" style='color:#154200'>All</span> 
+    </p>
+  </div>
+  <input type='hidden' id='default_sort' name = 'sort' value = "popularity">
+  <div class='mid_center' style="background: #000">
+    <div class='Keywords' id='search_keyword'>
+      <input type='hidden' name='hdn_keyword' value="">
+      <%= render 'static/sorting_keyword' %>
+    </div>
+    <div class='Gender'>
+      <input type='hidden' id='gender' name = 'hdn_gender' value = "">
+      <div class='Gender1'>
+        <p class='genderfind' value='both'><img src="/images/both.png"></P>
+      </div>
+      <p class='Gender2' id='gendermale' value='male'>
+        <img src="/images/male.jpg">
+      </p>
+      <p class='Gender3' id='genderfemale' value='female' >
+        <img src="/images/female.jpg">
+      </p>
+    </div>
+    <div class='age'>
+      <p class='select_all_age'>All Ages</p>
+      <input type="hidden" name='hdn_age' value="">
+      <% (1..9).each do |age| %>
+        <p class= 'whitetext18' id = "age_<%= age * 10%>" value='<%= age * 10 %>' onclick = "multiple_age(<%= age * 10%>)"><%= age * 10 %>s</p>
+      <% end %>
+    </div>
+    <div class='location'>
+      <p class='select_all_location'>All Location</p>
+      <input type="hidden" name='hdn_location' value="">
+        <% unless @find_locations.empty? %>
+          <% i = 1 %>
+          <% @find_locations.sort { |first,second| first.query.downcase <=> second.query.downcase }.each do |loc| %>
+            <p class= 'whitetext3' id = "location_<%=i%>" value='<%= loc.query %>' onclick = "multiple_location(<%=i%>)"><%= loc.query %></p>
+            <% i = i + 1 %>
+          <% end %>
+        <% end %>
+    </div>
+    <div class='Stories'>
+      <p class='select_all_story'>All Stories</p>
+      <input type="hidden" name='hdn_stories' value="">
+      <% i = 1 %>
+      <% @stories_loc.each do |title| %>
+        <p class= 'whitetext4' id = "story_<%=i%>" value='<%= title %>' onclick = "multiple_stories(<%= i %>)"><%= title.first(15) %></p>
+        <% i = i + 1 %>
+      <% end %>
+    </div>
+    <div class='date'>
+      <p class='select_all_date'>All Dates</p>
+      <p class='whitetext1'>
+        <div class= 'date_view'>
+          <div class='year'>
+            <input type='hidden' class='show_year' name='hdn_year' value="">
+            <% year = Time.now.year %>
+            <% (2001..year).each do |years| %>
+            <div class='whitetext12'>
+              <p class='view' id='year_<%= years %>' value='<%= years %>' onclick = "single_year(<%= years%>)"><%= years %></p>
+            </div>
+            <% end %>
+          </div>
+          <div class='month' id='text'>
+            <input type='hidden' class='show_month' name='hdn_month' value="">
+            <p class='month_view' value='1'>January</p>
+            <p class='month_view' value='2'>Febuary</p>
+            <p class='month_view' value='3'>March</p>
+            <p class='month_view' value='4'>April</p>
+            <p class='month_view' value='5'>May</p>
+            <p class='month_view' value='6'>June</p>
+            <p class='month_view' value='7'>July</p>
+            <p class='month_view' value='8'>August</p>
+            <p class='month_view' value='9'>September</p>
+            <p class='month_view' value='10'>October</p>
+            <p class='month_view' value='11'>November</p>
+            <p class='month_view' value='12'>December</p>
+          </div>
+          <div class='day' id='mytext'>
+            <input type='hidden' class='show_day' name='hdn_day' value="">
+            <% (1..30).each do |day| %>
+              <p class='day_view' value='<%= day %>'><%= day %></p>
+            <% end %>
+          </div>
+        </div>
+      </p>
+    </div>
+  </div>
+  <div class='mid_bottom' style="background: #000">
+    <div class='greenimage'>
+      <p class='submitsearch-btn'>
+        <input type= 'image' src='/images/submit-btn.jpg', height= '29', width = '131', border = '0', alt= 'Submit Form' >
+      </p>
+    </div>
+  </div>
+<% end %>
+<script type="text/javascript">
+  /* for toggle window */  
+  jQuery('#advancesearchForm').css('display', 'none')
+  
+/*
+  jQuery('#filters').click(function() {
+    jQuery('.middle').toggle()
+    jQuery('.left').addClass('advancesearch')
+    jQuery('#keywordSearch').css('display', 'block')
+    jQuery('#keywordSearch .advancesearch').css('display', 'none')
+    jQuery('.right').addClass('searchoption')
+    jQuery('#keywordSearch .searchoption').css('display', 'none')
+  })
+
+  jQuery('#btnKeyword').click(function(){
+    jQuery('#keywordSearch .advancesearch').css('display', 'block')
+    jQuery('#keywordSearch .searchoption').css('display', 'block')
+    jQuery('.middle').addClass('newtab')
+    jQuery('#keywordSearch .newtab').css('display', 'none')
+  })
+
+  jQuery('#btnMap').click(function(){
+    jQuery('#keywordSearch').css('display', 'none')
+  })
+
+*/
+
+  /* function for using show or hide year,month or day or change color when selected at home page */
+  jQuery('.view').click(function(){
+    
+  })
+  var count_date = 0;
+  jQuery('.select_all_date').click(function() {
+    count_date++;
+    if(count_date === 1)
+    {
+      jQuery('.month').css('display', 'none');
+      jQuery('[name=hdn_year]').val("");
+      jQuery('.view').css('color', '#ff5000');
+    }
+    else
+    {
+      jQuery('.view').css('color', '#ccc');
+      count_date = 0;
+    }
+  })
+
+  jQuery('.month_view').click(function(){
+    jQuery('.day').css('display', 'block')
+    jQuery('.month_view').removeClass('monthshow')
+    jQuery(this).addClass('monthshow')
+    jQuery('.day_view').css('display', 'block')
+    jQuery('.day_view').removeClass('dayshow')
+  })
+
+  jQuery('.day_view').click(function(){
+    jQuery('.day_view').removeClass('dayshow')
+    jQuery(this).addClass('dayshow')
+  })
+  /* filling the value of (keyword,gender,age,location,stories,date) into hidden value */
+  jQuery('.whitetext').click(function() {
+  
+  })
+  function multiple_keyword(id){
+    var a = "#white_" + id;
+    var b = jQuery(a).text();
+    var c = jQuery('[name=hdn_keyword]').val();
+    if(c.length > 0){
+      if(c.search(b) != -1) {
+        // jQuery(a).css('color', '#ccc')
+        jQuery(a).removeClass("active_story");
+        var d = c.replace(new RegExp(',?' + b), '');
+        jQuery('[name=hdn_keyword]').val(d);
+      }
+      else{
+        jQuery('[name=hdn_keyword]').val(c + "," + b);
+        // jQuery(a).css('color', '#ff5000');
+        jQuery(a).addClass("active_story");
+      }
+    }
+    else{
+      jQuery('[name=hdn_keyword]').val(b);  
+      // jQuery(a).css('color', '#ff5000');
+      jQuery(a).addClass("active_story");
+    }
+  }
+  var count_keyword = 0;
+  jQuery('.select_all_keyword').click(function() {
+    count_keyword++;
+    var a = "";
+    var b = jQuery(".whitetext").length
+    for(var i = 1;i<=b;i++)
+    {
+      var c = "#white_"+ i
+      var d = jQuery(c).attr("value")
+      a = a + d + ","
+    }
+    
+    if(count_keyword === 1)
+    {
+      jQuery('[name=hdn_keyword]').val(a)
+      jQuery('.Keywords .whitetext').css('color', '#ff5000')
+    }
+    else
+    {
+      jQuery('[name=hdn_keyword]').val("")
+      jQuery('.Keywords .whitetext').css('color', '#ccc')
+      count_keyword = 0
+    }
+  })
+  
+  function multiple_age(id){
+    var a = "#age_" + id;
+    var b = jQuery(a).attr("value");
+    var c = jQuery('[name=hdn_age]').val();
+    if(c.length > 0){
+      if(c.search(b) != -1) {
+        // jQuery(a).css('color', '#ccc')
+        jQuery(a).removeClass("active_story");
+        var d = c.replace(new RegExp(',?' + b), '');
+        jQuery('[name=hdn_age]').val(d);
+      }
+      else{
+        jQuery('[name=hdn_age]').val(c + "," + b);
+        // jQuery(a).css('color', '#ff5000');
+        jQuery(a).addClass("active_story");
+      }
+    }
+    else{
+      jQuery('[name=hdn_age]').val(b);  
+      // jQuery(a).css('color', '#ff5000');
+      jQuery(a).addClass("active_story");
+    }
+  }
+
+  jQuery('.whitetext18').click(function() {
+
+  })
+  var count_age = 0;
+  jQuery('.select_all_age').click(function() {
+    count_age++;
+    var a = "";
+    var b = jQuery(".whitetext18").length
+    for(var i = 1;i<=b;i++)
+    {
+      var c = "#age_"+ i * 10;
+      var d = jQuery(c).attr("value")
+      a = a + d + ","
+    }
+    if (count_age === 1) {
+      jQuery('[name=hdn_age]').val(a)
+      jQuery('.age .whitetext18').css('color', '#ff5000')
+    }
+    else{
+      jQuery('[name=hdn_age]').val("")
+      jQuery('.age .whitetext18').css('color', '#ccc')
+      count_age = 0
+    }
+  })
+
+  function multiple_location(id){
+    var a = "#location_" + id;
+    var b = jQuery(a).attr("value");
+    var c = jQuery('[name=hdn_location]').val();
+    if(c.length > 0){
+      if(c.search(b) != -1) {
+        // jQuery(a).css('color', '#ccc')
+        jQuery(a).removeClass("active_story");
+        var d = c.replace(new RegExp(',?' + b), '');
+        jQuery('[name=hdn_location]').val(d);
+      }
+      else{
+        jQuery('[name=hdn_location]').val(c + "," + b);
+        // jQuery(a).css('color', '#ff5000');
+        jQuery(a).addClass("active_story");
+      }
+    }
+    else{
+      jQuery('[name=hdn_location]').val(b);  
+      // jQuery(a).css('color', '#ff5000');
+      jQuery(a).addClass("active_story");
+    }
+  }
+
+  jQuery('.whitetext3').click(function() {
+  
+  })
+  var count_location = 0;
+  jQuery('.select_all_location').click(function() {
+    count_location++;
+    var a = "";
+    var b = jQuery(".whitetext3").length
+    for(var i = 1;i<=b;i++)
+    {
+      var c = "#location_"+ i
+      var d = jQuery(c).attr("value")
+      a = a + d + ","
+    }
+    if(count_location === 1)
+    {
+      jQuery('[name=hdn_location]').val(a)
+      jQuery('.location .whitetext3').css('color', '#ff5000')
+    }
+    else
+    {
+      jQuery('[name=hdn_location]').val("")
+      jQuery('.location .whitetext3').css('color', '#ccc')
+      count_location = 0;
+    }
+  })
+
+  function multiple_stories(id){
+    var a = "#story_" + id;
+    var test = "story_"+id;
+    var b = jQuery(a).attr("value");
+    var c = jQuery('[name=hdn_stories]').val();
+    if(c.length > 0){
+      if(c.search(b) != -1) {
+        // jQuery(a).css('color', '#ccc')
+        jQuery(a).removeClass("active_story");
+        var d = c.replace(new RegExp(',?' + b), '');
+        jQuery('[name=hdn_stories]').val(d);
+      }
+      else{
+        jQuery('[name=hdn_stories]').val(c + "," + b);
+        // jQuery(a).css('color', '#ff5000');
+        jQuery(a).addClass("active_story");
+      }
+    }
+    else{
+      jQuery('[name=hdn_stories]').val(b);  
+      // jQuery(a).css('color', '#ff5000');
+      jQuery(a).addClass("active_story");
+      // document.getElementById(test).style.cssText = "color:#ff5000 !important";
+    }
+  }
+
+  jQuery('.whitetext4').click(function() {
+    
+  })
+  
+  var count_story = 0;
+  jQuery('.select_all_story').click(function() {
+    count_story++;
+    var a = "";
+    var b = jQuery(".whitetext4").length
+    for(var i = 1;i<=b;i++)
+    {
+      var c = "#story_"+ i
+      var d = jQuery(c).attr("value")
+      a = a + d + ","
+    }
+    if(count_story === 1)
+    {
+      jQuery('[name=hdn_stories]').val(a)
+      jQuery('.Stories .whitetext4').css('color', '#ff5000')
+    }
+    else
+    {
+      jQuery('[name=hdn_stories]').val("")
+      jQuery('.Stories .whitetext4').css('color', '#ccc')
+      count_story = 0;
+    }
+    
+  })
+
+  function single_year(id){
+    var a = "#year_" + id;
+    var b = jQuery(a).attr("value");
+    var c = jQuery('[name=hdn_year]').val();
+    jQuery('.view').css('color','#ccc')
+    jQuery(a).css('color', '#ff5000');
+    jQuery('.month').css('display', 'block')
+    jQuery('.view').removeClass('yearshow')
+    jQuery(this).addClass('yearshow')
+    jQuery('.day_view').css('display', 'none')
+    jQuery('.month_view').removeClass('monthshow')
+    jQuery('.day_view').removeClass('.dayshow')
+  }
+  jQuery('.view').click(function() {
+    var current_value = jQuery(this).html();
+    var a = "#year_" + current_value;
+    var b = jQuery(a).attr("value");
+    var c = jQuery('[name=hdn_year]').val();
+    if(current_value == c){
+      var remove_color = "#year_" + c;
+      jQuery(remove_color).removeClass("active_story");
+    }
+    else{
+      var remove_color = "#year_" + c;
+      jQuery(remove_color).removeClass("active_story");
+      jQuery(a).addClass("active_story");
+    }
+    jQuery('[name=hdn_year]').val(jQuery(this).attr('value'))    
+  })
+
+  jQuery('.month_view').click(function() {
+    jQuery('[name=hdn_month]').val(jQuery(this).attr('value'))
+  }) 
+
+  jQuery('.day_view').click(function() {
+    jQuery('[name=hdn_day]').val(jQuery(this).attr('value'))
+  })
+  var count_gender = 0
+  jQuery('.select_all_gender').click(function(){    
+    count_gender++;
+    if(count_gender === 1)
+    {
+      jQuery('.Gender1').addClass('Gender1show')
+      jQuery('.Gender1 .Gender1show').css('visibility', 'hidden')
+      jQuery('.Gender2').addClass('Gender2show')
+      jQuery('.Gender2 .Gende2rshow').css('visibility', 'hidden')
+      jQuery('.Gender3').addClass('Gender3show')
+      jQuery('Gender3 .Gender3show').css('visibility', 'hidden')  
+    }
+    else
+    {
+      jQuery('.Gender1').removeClass('Gender1show')
+      jQuery('.Gender2').removeClass('Gender2show')
+      jQuery('.Gender3').removeClass('Gender3show')
+      count_gender = 0;
+    }
+    
+  })  
+
+  jQuery('.Gender1').click(function(){
+    jQuery('[name=hdn_gender]').val(jQuery('.genderfind').attr('value'))
+    jQuery('.Gender1').addClass('Gender1show')
+    jQuery('.Gender1 .Gender1show').css('visibility', 'hidden')
+    jQuery('.Gender2').removeClass('Gender2show')
+    jQuery('.Gender3').removeClass('Gender3show')
+  })
+
+  jQuery('.Gender2').click(function(){
+    jQuery('[name=hdn_gender]').val(jQuery(this).attr('value'))
+    jQuery('.Gender2').addClass('Gender2show')
+    jQuery('.Gender2 .Gende2rshow').css('visibility', 'hidden')
+    jQuery('.Gender1').removeClass('Gender1show')
+    jQuery('.Gender3').removeClass('Gender3show')
+  })
+
+  jQuery('.Gender3').click(function(){
+    jQuery('[name=hdn_gender]').val(jQuery(this).attr('value'))
+    jQuery('.Gender3').addClass('Gender3show')
+    jQuery('Gender3 .Gender3show').css('visibility', 'hidden')
+    jQuery('.Gender1').removeClass('Gender1show')
+    jQuery('.Gender2').removeClass('Gender2show')
+  })
+
+  jQuery('.atoz').click(function(){
+    jQuery('[name=hdn_atoz]').val(jQuery(this).attr('value'))
+  })
+  /* end of filling hidden value */
+    
+  function get_keyword_value(pid) {  
+    jQuery.ajax({
+      url: "/sorting_with_keyword?with=" + pid,
+      type: "GET"
+    });
+  }
+
+
+//]]>
+</script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#example_dlg.title}</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="js/dialog.js"></script>
+	 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+
+<form action="/assets" class="new_asset" enctype="multipart/form-data" id="new_asset" method="post">
+  <p><label for="asset_src">Upload a file:</label><br/>
+  <input id="asset_src" name="asset[src]" size="30"  type="file" /></p>
+	   
+             	<div class="progress-bar"></div></br>
+
+		<input id="asset_submit" name="commit" type="submit" value="Upload" onclick="return file_upload()" />         	
+	
+</form>
+
+</body>
+</html>
+<script type="text/javascript">
+	function file_upload(){	
+		jQuery('.progress-bar').animate(
+		    {width:'100%'}, 
+		    {
+			duration:30000,
+			step: function(now, fx) {
+			    var data= Math.round(now);
+			    jQuery(this).html(data + '%');
+			    
+			}
+		    }        
+		);
+	};
+
+</script>
+<style>
+.progress-bar { height:15px; background:#709691; width:0; text-align:center; border-radius:8px 8px 8px 8px; }
+</style>
+
+
+

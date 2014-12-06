@@ -1,0 +1,97 @@
+div#locationList {
+  display: none;
+  position: absolute;
+  right: 50px;
+  top: 110px;
+  width: 343px;
+  height: 389px;
+  border: 5px solid #333;
+  font: 11px Verdana;
+  z-index: 5000;
+  }
+div#locationList div.top {
+  position: relative;
+  height: 52px; 
+  padding: 13px 0 0 20px;
+  background-color: #111;
+  border-bottom: 5px solid #000;
+  filter:alpha(opacity=90);
+ 	-moz-opacity:0.9;
+ 	-khtml-opacity: 0.9;
+ 	opacity: 0.9;
+  }	   
+div#locationList div.bottom {
+  position: relative;
+  height: 319px;
+  background-color: #333;
+  overflow: auto;
+  filter:alpha(opacity=80);
+ 	-moz-opacity:0.8;
+ 	-khtml-opacity: 0.8;
+ 	opacity: 0.8;
+  }
+div#locationList div.top h2 {
+  margin: 0;
+  padding: 0;
+  font: normal 17px Verdana;
+  color: #fff;
+  }
+div#locationList div.top h3 {
+  margin: 0;
+  padding: 0;
+  font: 11px Verdana;
+  color: #878787;
+  }	   	
+div#locationList div.top a.viewAll {
+  display: block;
+  position: absolute;
+  right: 35px;
+  top: 10px;
+  padding: 3px 5px 3px 5px;
+  text-decoration: none;
+  color: #878787;
+  z-index: 10;
+  }
+div#locationList div.top a.viewAll:hover {
+  text-decoration: underline;
+  }
+div#locationList div.top a.close {
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 3px 5px 3px 5px;
+  text-decoration: none;
+  background-color: #000;
+  color: #fe2700;
+  z-index: 20;
+  }
+div#locationList ul {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0 0 0;
+  list-style-type: none;
+  }
+div#locationList ul li {
+  float: left;
+  margin:  0 0 7px 0;
+  padding: 0;
+ 	color: #c1c1c1;
+  }    
+div#locationList ul li.label {
+  font-style: italic;
+  font-weight: bold;
+  }
+div#locationList ul li.title {
+  width: 60%;
+  }
+div#locationList ul li.title a {
+  color: #fff;
+  }
+div#locationList ul li.date {
+  width: 20%;
+  }
+div#locationList ul li.views {
+  width: 20%;
+  text-align: right;
+  }

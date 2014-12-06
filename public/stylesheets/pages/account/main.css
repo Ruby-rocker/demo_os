@@ -1,0 +1,38 @@
+a#btnSubmitLg {
+  display: block;
+  position: relative;
+  width: 243px;
+  height: 27px;
+  margin-bottom: 35px;
+  background-image: url(/images/pages/account/btnsubmit.gif);
+  }
+a#btnSubmitLg:hover {
+  background-position: 0 -27px;
+  }
+a#btnSubmitLg:active {
+  background-position: 0 -54px;
+  }
+
+div#archive h2 {
+  width: 169px;
+  height: 27px;
+  background-image: url(/images/pages/account/archive.gif);
+  }
+div#bookmarks h2 {
+  width: 243px;
+  height: 27px;
+  background-image: url(/images/pages/account/bookmarks.gif);
+  }
+  
+div.userList {
+  display: block;
+  position: relative;
+  margin: 0 0 65px 0;
+  }
+div.userList div.pagination {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  text-align: right;
+  }
+  

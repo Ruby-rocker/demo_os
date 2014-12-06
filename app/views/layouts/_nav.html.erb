@@ -1,0 +1,12 @@
+<ul id="nav">
+	<% if params[:action] == 'index' && params[:controller] == 'static' %>
+		<li><%= link_to 'Over Story', ourstory_path, :id => 'btnOurstory', :class => 'image', :style => "margin-left: 5px"  %></li>
+	<% else %>
+		<li><%= link_to 'home', root_path, :id => 'btnHome', :class => 'image', :style => nav_style(root_path) %></li>
+	<% end %>
+		<li><%= link_to 'my account', account_path, :id => 'btnAccount', :class => 'image', :style => nav_style(logged_in? ? current_user.link_path : account_path) %></li>
+	
+		<li><%= link_to 'submit a story', logged_in? ? new_story_path(current_user) : account_path, :id => 'btnSubmitStory', :class => 'image', :style => logged_in? ? nav_style(new_story_path(current_user)) : '' %></li>
+	
+		<li><%= link_to 'contact', contacts_path, :id => 'btnContact', :class => 'image', :style => nav_style(contacts_path) %></li>
+</ul>

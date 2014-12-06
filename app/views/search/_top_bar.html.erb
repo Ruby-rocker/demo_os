@@ -1,0 +1,16 @@
+<%= link_to "Search", new_search_path, :id => "btnNewSearch", :onclick => 'return false;' %>
+<%= link_to "New Filter", new_search_path, :id => "btnAdvanceSearch", :onclick => 'return false' %>
+<%= link_to "List Results By:", "#", :id => "btnSortOptions" %>
+
+<ul class="sort" id="navSort">
+  <li><%= order_by_link("alphabetically") %></li>
+  <li><%= order_by_link("popularity") %></li>
+  <li><%= order_by_link("date") %></li>
+  <li><%= show_all_stories %></li>
+</ul>
+ 
+<div id="viewButtons">
+  <a href="#list" id="btnList" class="image">list</a>
+  <span id="slash" class="image">/</span>
+  <a href="#map" id="btnMap" class="image">map</a>
+</div>

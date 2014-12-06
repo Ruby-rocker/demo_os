@@ -1,0 +1,5 @@
+<%= button_to "Add New Banner", new_admin_banner_path, :method => 'get', :class => "btnImage"%>
+<% @banner.each do |banner| %>
+	<%= banner.name %>
+	<br>
+<%end%>

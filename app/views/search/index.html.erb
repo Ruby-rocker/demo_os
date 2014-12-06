@@ -1,0 +1,179 @@
+<%= render :partial => 'form' %>
+<%= render :partial => 'advance_search' %>
+<div id="listView">
+
+
+	<div id="criteria">
+		
+		<h2 class="green">Search Results For:</h2>
+		<h3><b>Newest</b> of <b><%= @stories.total_entries %></b> stories for:</h3>
+		<% @queries.each do |query| %>
+  		<%= query_label(query[0], query[1]) %>
+		<% end -%>
+		
+	</div>
+	
+	<% unless @stories.empty? %>
+  <ul id="results">	
+  	<% @stories.each_with_index do |story,index| %>
+  	 <% index += 1 + (@stories.per_page * (@stories.current_page - 1)) %>
+  	    <li class="result" id="<%= "story_#{story.id}" %>">
+      		<span class="hidden"><%= story.view_count %></span>
+    			<h2><%= link_to((index < 10 ? "0#{index}" : index), story.link_path, :class => 'story') %></h2>
+      		<h1><%= link_to(h(story.title), story.link_path, :class => 'story' ) %></h1>
+      		<%= render :partial => "stories/detail", :locals => { :story => story } %>
+    		</li>
+  	<% end -%>
+  </ul>
+  <% end -%>
+  
+</div>
+
+<div id="map"></div>
+
+<div class="clear">&nbsp;</div>
+
+<%= will_paginate @stories, :style => 'text-align: center;', :inner_window => 4, :outer_window => 2 %>
+  
+  
+<%= render :partial => 'layouts/result_win' %>
+
+<script type="text/javascript">
+//<![CDATA[
+        
+  var tgl, resWin;
+  var sortKeyNav, sortLocNav, sortKey, sortLoc;
+  var stories = [];
+  var locations = [];
+  
+  
+  <% @locations.each do |id, geocodings| %>
+    <% geocoding = geocodings.first %>
+    <%#= "stories.push({ location: #{id}, stories: [#{geocodings.collect{|g|g.geocodable_id}.join(',')}] });" %>
+    <%= "locations.push({ geocode: { id: #{id}, stories: [#{geocodings.collect{|g|g.geocodable_id}.join(',')}], count: #{geocodings.length}, title: \"#{CGI::escapeHTML(geocoding.geocode.query.gsub(/\n|\r/, ''))}\", latitude: #{geocoding.geocode.latitude}, longitude: #{geocoding.geocode.longitude} } });" if geocoding.geocode && geocoding.geocode.latitude && geocoding.geocode.longitude %>
+  <% end %>
+
+	
+	var story_ids = [<%= @stories.map{|s| s.id }.join(',') %>];
+	function showLocation(marker) {
+    var win = OneStory.ResultWindow.win = (OneStory.ResultWindow.win || new OneStory.ResultWin('locationList'));
+    var ids = null;
+    var id = marker.id;
+    var title = marker.getTitle();
+    
+    locations.each(function(i) {
+      if (i.geocode.title == title) ids = i.geocode.stories;
+    });
+    
+    win.update({ ids: ids, subtitle: title });
+  }
+	
+	
+	
+  function load() {
+    if (GBrowserIsCompatible()) {
+	    OneStory.Maps.set(setupMap());
+     	OneStory.Markers.addMarkers(locations, { callback: showLocation });
+	    newSearch = new Mootils.MiniNav('btnNewSearch', 'searchForm', { hideOnClick: false, offset: { x: -122, y: 0 }});
+      newSearch = new Mootils.MiniNav('btnAdvanceSearch', 'advancesearchForm', { hideOnClick: false, offset: { x: -123, y: 0 }});
+      sortNav = new Mootils.MiniNav('btnSortOptions', 'navSort', { offset: { x: -123, y: 46 }});
+      initToggle();
+      
+    }
+  }
+  function setupMap() {
+    var map = new google.maps.Map2(document.getElementById('map'), { mapTypes: [ G_PHYSICAL_MAP, G_NORMAL_MAP, G_SATELLITE_MAP ], backgroundColor: '#efefef' });
+    map.setCenter(new google.maps.LatLng(23, 0), 2);
+    // map.addControl(new GLargeMapControl(), new GControlPosition(G_ANCHOR_TOP_RIGHT, new GSize(16, 36)));
+    // map.addControl(new GMenuMapTypeControl(), new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(26, 36)));    
+    // map.enableDoubleClickZoom();
+    return map;
+  }
+  
+  
+  
+  // TOGGLER
+  var btns = ['btnList','btnMap']
+  
+  var o, rslide, overflow, animating;
+  
+  function initToggle() {    
+    o = Number(Cookie.read('searchToggle'));
+    rslide = rslide || new Fx.Slide('listView', { mode: 'horizontal' });
+    btns.each(function(el,idx) {
+      btns[idx] = $(el).addEvent('click', toggle);
+    });
+    
+    if (o) {
+      setOpen();
+    } else {
+      setActive('btnList');
+    }
+
+  }
+  function resetButtons() {
+    btns.each(function(el,idx) {
+      $(el).removeClass('active');
+    });
+  }
+  function setActive(button) {
+    $(button).addClass('active');
+  }
+  function toggle(evt) {
+    if (animating) return;
+    animating = true;
+    resetButtons();
+    evt = new Event(evt).stop();
+    setActive(evt.target);
+    if (o) {
+      rslide.slideIn();
+      $('listView').setStyles({ 'height': 'auto', 'overflow': 'auto' });
+      $('map').get('morph', { onComplete: function(evt) {
+        OneStory.Maps.getMap().checkResize();
+        animating = false;
+      }}).start({
+        'width': 440,
+        'height': 400
+      });
+      o = 0;
+    } else {
+      rslide.slideOut();
+      $('map').get('morph', { onComplete: function(evt) {
+        OneStory.Maps.getMap().checkResize();
+        $('listView').setStyles({ 'height': 0, 'overflow': 'hidden' });
+        animating = false;
+      }}).start({
+        'width': 930,
+        'height': getMapHeight()
+      });
+      o = 1;
+    }
+    Cookie.write('searchToggle', o);
+  }
+  function setOpen(){
+    $('map').setStyles({
+      'width': 930,
+      'height': getMapHeight()
+    });
+    $('listView').setStyles({ 'height': 0, 'overflow': 'hidden' });
+    rslide.hide();
+    OneStory.Maps.getMap().checkResize();
+    setActive('btnMap');
+  }
+  function getMapHeight() {
+    var h = $(window).getSize().y - 187; 
+    var rh = $('listView').getSize().y;
+    return h < rh ? h : h - 41;
+  }
+  $(window).addEvent('resize', function(evt){
+    if (!o) return;
+    $('map').setStyle('height', getMapHeight());
+    OneStory.Maps.getMap().checkResize();
+  }.bind(this));
+
+  
+  window.addEvent('load', load);
+  window.addEvent('unload', GUnload);
+  
+//]]>
+</script>

@@ -1,0 +1,21 @@
+div#content,
+div#map {
+  display: block;
+  width: 930px;
+  height: 700px;
+  left: 5px;
+  top: 0;
+  margin: 0 0 40px 0;
+  padding: 0;
+  }
+div#map {
+  overflow: hidden;
+  position: absolute;
+  z-index: 100;
+  background-color: #fff;
+  }
+
+div#locationList {
+  top: 20px;
+  right: 21px;
+  }

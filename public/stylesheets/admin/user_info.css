@@ -1,0 +1,6 @@
+div#map {
+  overflow: hidden;
+  width: 305px;
+  height: 305px;
+  border: 1px solid #777;
+  }

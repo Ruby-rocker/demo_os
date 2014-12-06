@@ -1,0 +1,21 @@
+div#map {
+  background: #aab699 url(/images/pages/home/loading.png) center 95px no-repeat;
+  }
+div#mapButtons a {
+  background-image: url(/images/map_fil_jum.png)
+  }
+div#mapTop form input#btn_go {
+	background-image: url(/images/pages/home/btn_go.png);
+  }
+div#keywordSearch form input#btn_search {
+/*	background-image: url(/images/btn_search.png); */
+  }
+div#mapLegend {
+  background: transparent url(/images/pages/home/bg_legend.png) 0 0 no-repeat;
+  }
+div#mapLegend div.end {
+  background: transparent url(/images/pages/home/bg_recent_end.png) 0 0 no-repeat;
+  }
+a#btnShareStory {
+	background-image: url(/images/pages/home/btn_share.png);
+  }

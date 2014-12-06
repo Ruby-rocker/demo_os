@@ -1,0 +1,41 @@
+<%= image_title("/admin/titles/statistics.gif", "Statistics") %>
+
+<div class="stats">
+
+  <h2><%= count_string(User.count, 'users') %></h2>
+  <h4>
+    <%= count_string(User.count(:id, :conditions => "year(created_at) = #{Time.now.year} AND month(created_at) = #{Time.now.month} AND day(created_at) = #{Time.now.day}"), 'users') %> signed up today |
+    <%= count_string(User.count(:id, :conditions => { :gender => true }), 'male users') %> |
+    <%= count_string(User.count(:id, :conditions => { :gender => false }), 'female users') %> |
+    <%= count_string(User.count(:id, :conditions => "users.gender IS NULL"), 'unspecified users') %>
+  </h4>
+  
+  <h2><%= count_string(Story.count, 'stories') %></h2>
+  <h4>
+    <%= count_string(Story.count(:id, :conditions => ["published = ?", true]), 'published stories') %> | 
+    <%= count_string(Story.count(:id, :conditions => ["published = ?", false]), 'unpublished stories') %> |
+    <%= count_string(Story.count(:id, :conditions => "year(created_at) = #{Time.now.year} AND month(created_at) = #{Time.now.month} AND day(created_at) = #{Time.now.day}"), 'stories') %> created today
+  </h4>
+  
+  <h2><%= count_string(Paragraph.count, 'paragraphs') %></h2>
+  <h4><%= count_string(Paragraph.count(:id, :conditions => "year(created_at) = #{Time.now.year} AND month(created_at) = #{Time.now.month} AND day(created_at) = #{Time.now.day}"), 'paragraphs') %> created today</h4>
+    
+  <h2><%= count_string(Asset.count, 'photos') %></h2>
+  <h4><%= count_string(Asset.count(:id, :conditions => "year(created_at) = #{Time.now.year} AND month(created_at) = #{Time.now.month} AND day(created_at) = #{Time.now.day}"), 'photos') %> uploaded today</h4>
+    
+  <h2><%= count_string(ViewCount.count, 'story-views') %></h2>
+  <h4>
+    <%= count_string(ViewCount.count(:id, :conditions => "year(created_at) = #{Time.now.year} AND month(created_at) = #{Time.now.month} AND day(created_at) = #{Time.now.day}"), 'views') %> today
+  </h4>
+  
+  <h2><%= count_string(Tag.count, 'tags') %></h2> 
+  <h4>
+    <%= count_string(Tagging.count(:id, :conditions => "year(created_at) = #{Time.now.year} AND month(created_at) = #{Time.now.month} AND day(created_at) = #{Time.now.day}"), 'tags') %> linked today
+  </h4>
+  
+  <h2><%= count_string(Geocode.count, 'locations') %></h2>
+  <h4>
+    <%= count_string(Geocoding.count(:id, :conditions => "year(created_at) = #{Time.now.year} AND month(created_at) = #{Time.now.month} AND day(created_at) = #{Time.now.day}"), 'locations') %> linked today
+  </h4>
+  
+</div>
